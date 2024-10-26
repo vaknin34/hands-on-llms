@@ -18,6 +18,13 @@ This dataset should resemble as much as possible the actual questions, and answe
 
 * Run the init script for environment variables
     ```
+    $ cp set_env_variables_template.sh set_env_variables.sh
+    ```
+
+* Edit set_env_variables.sh to include your external service credentials.
+    
+* Run the init script for environment variables
+    ```
     $ . ./set_env_variables.sh
     ```
 
@@ -25,6 +32,10 @@ This dataset should resemble as much as possible the actual questions, and answe
     ```
     $ make training-data
     ```
+**Note:** If not working due to the error message: "libcudnn.so.8: cannot open shared object file: No such file or directory", try to copy all the "nvidia" prefixed libraries from the training pipeline poetry folder, which can be found by running from the trining pipeline folder the following command:
+    ```
+    $ poetry env list --full-path
+    ``` 
 
 ## Not used here but might be useful later on
 

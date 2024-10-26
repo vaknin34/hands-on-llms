@@ -1,7 +1,6 @@
 <div align="center">
     <h2>Hands-on LLMs Course </h2>
     <h1>Learn to Train and Deploy a Real-Time Financial Advisor</h1>
-    <i>by <a href="https://github.com/iusztinpaul">Paul Iusztin</a>, <a href="https://github.com/Paulescu">Pau Labarta Bajo</a> and <a href="https://github.com/Joywalker">Alexandru Razvant</a></i>
 </div>
 
 ## Table of Contents
@@ -19,10 +18,6 @@
     - [2.5. AWS](#25-aws)
 - [3. Install & Usage](#3-install--usage)
 - [4. Lectures](#4-lectures)
-    - [4.1. Costs](#41-costs)
-    - [4.2. Ask Questions](#42-ask-questions)
-    - [4.3. Video lectures](#43-video-lectures)
-    - [4.4. Articles](#44-articles)
 - [5. License](#6-license)
 - [6. Contributors & Teachers](#7-contributors--teachers)
 
@@ -100,7 +95,7 @@ We used `GPT3.5` to generate a financial Q&A dataset to fine-tune our open-sourc
 
 → To understand how we generated the financial Q&A dataset, [check out this article](https://open.substack.com/pub/paulabartabajo/p/how-to-generate-financial-q-and-a?r=1ttoeh&utm_campaign=post&utm_medium=web) written by [Pau Labarta](https://github.com/Paulescu).
 
-→ To see a complete analysis of the financial Q&A dataset, check out the [dataset_analysis](https://github.com/iusztinpaul/hands-on-llms/blob/main/dataset_analysis) subsection of the course written by [Alexandru Razvant](https://github.com/Joywalker).
+→ To see a complete analysis of the financial Q&A dataset, check out the [dataset_analysis](https://github.com/ishai-rosenberg/hands-on-llms/blob/main/dataset_analysis) subsection of the course written by [Alexandru Razvant](https://github.com/Joywalker).
 
 ![EDA](./media/eda_prompts_dataset.png)
 
@@ -145,7 +140,7 @@ After, you must follow their [installation guide](https://docs.beam.cloud/gettin
 
 To read more about Beam, here is an [introduction guide](https://docs.beam.cloud/getting-started/introduction?utm_source=thepauls&utm_medium=partner&utm_content=github).
 
-**Note:** You have ~10 free compute hours. Afterward, you pay only for what you use. If you have an Nvidia GPU >8 GB VRAM & don't want to deploy the training & inference pipelines, using Beam is optional. 
+**Note:** Beam new API broke the possibility to run this code using Beam, as mentioned [here](https://github.com/iusztinpaul/hands-on-llms/issues/86). If you have an Nvidia GPU >8 GB VRAM & don't want to deploy the training & inference pipelines, you can run the training and inference pipelines locally. Otherwise, you'll have to run it on an GPU-enabled AWS on-demand instance, e.g., g4dn.2xlarge. See the instances prices [here](https://aws.amazon.com/ec2/instance-types/). 
 
 #### Troubleshooting
 
@@ -186,127 +181,34 @@ In each module's video lectures, articles, and README documentation, you will fi
 
 Happy learning! 🙏
 
-### 4.1. Costs
-
-The GitHub code (released under the MIT license) and video lectures (released on YouTube) are entirely free of charge. Always will be.
-
-The Medium lessons are released under Medium's paid wall. If you already have it, then they are free. Otherwise, you must pay a $5 monthly fee to read the articles.
-
-### 4.2. Ask Questions
-
-If you have any questions or issues during the course, we encourage you to create an [issue](https://github.com/iusztinpaul/hands-on-llms/issues) in this repository where you can explain everything you need in depth. 
-
-Otherwise, you can also contact the teachers on LinkedIn:
-- [Paul Iusztin](https://www.linkedin.com/in/pauliusztin/)
-- [Pau Labarta](https://www.linkedin.com/in/pau-labarta-bajo-4432074b/)
-
-### 4.3. Video Lectures
-
-#### 4.3.1. Intro to the course
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=l4HTEf0_s70">
-      <p>Click here to watch the video 🎬</p>
-    <img src="media/youtube_thumbnails/00_intro.png" alt="Intro to the course" style="width:75%;">
-  </a>
-</div>
-
-
-#### 4.3.2. Fine-tuning our open-source LLM (overview)
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=HcxwOYMmj40">
-      <p>Click here to watch the video 🎬</p>
-    <img src="media/youtube_thumbnails/01_fine_tuning_pipeline_overview.png" alt="Intro to the course" style="width:75%;">
-  </a>
-</div>
-
-#### 4.3.3. Fine-tuning our open-source LLM (Hands-on!)
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=RS96R0dH0uE">
-      <p>Click here to watch the video 🎬</p>
-    <img src="media/youtube_thumbnails/02_fine_tuning_pipeline_hands_on.png" alt="Hands-on Fine Tuning an LLM" style="width:75%;">
-  </a>
-</div>
-
-#### 4.3.4. Real-time text embedding pipeline
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=5gX5XRZpb6E">
-      <p>Click here to watch the video 🎬</p>
-    <img src="media/youtube_thumbnails/03_real_time_embeddings.png" alt="Real-time text embedding pipeline" style="width:75%;">
-  </a>
-</div>
-
-#### 4.3.5. Inference pipeline
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=lXLv0zNdbgE">
-      <p>Click here to watch the video 🎬</p>
-    <img src="media/youtube_thumbnails/04_inference_pipeline.png" alt="Inference pipeline" style="width:75%;">
-  </a>
-</div>
-
-
-### 4.4. Articles
-
-`To understand the entire code step-by-step, check out our articles` ↓
-
-### System design
-- [Lesson 1: The LLMs Kit: Build a Production-Ready Real-Time Financial Advisor System Using Streaming Pipelines, RAG, and LLMOps](https://medium.com/decodingml/the-llms-kit-build-a-production-ready-real-time-financial-advisor-system-using-streaming-ffdcb2b50714)
-
-### Feature pipeline
-- [Lesson 2: Why you must choose streaming over batch pipelines when doing RAG in LLM applications](https://medium.com/decoding-ml/why-you-must-choose-streaming-over-batch-pipelines-when-doing-rag-in-llm-applications-3b6fd32a93ff)
-- [Lesson 3: This is how you can build & deploy a streaming pipeline to populate a vector DB for real-time RAG](https://medium.com/decodingml/this-is-how-you-can-build-deploy-a-streaming-pipeline-to-populate-a-vector-db-for-real-time-rag-c92cfbbd4d62)
-
-### Training pipeline
-- [Lesson 4: 5 concepts that must be in your LLM fine-tuning kit](https://medium.com/decodingml/5-concepts-that-must-be-in-your-llm-fine-tuning-kit-59183c7ce60e)
-- [Lesson 5: The secret of writing generic code to fine-tune any LLM using QLoRA](https://medium.com/decodingml/the-secret-of-writing-generic-code-to-fine-tune-any-llm-using-qlora-9b1822f3c6a4)
-- [Lesson 6: From LLM development to continuous training pipelines using LLMOps](https://medium.com/decodingml/from-llm-development-to-continuous-training-pipelines-using-llmops-a3792b05061c)
-
-### Inference pipeline
-- [Lesson 7: Design a RAG LangChain application leveraging the 3-pipeline architecture](https://medium.com/decodingml/design-a-rag-langchain-application-leveraging-the-3-pipeline-architecture-46bcc3cb3500)
-- [Lesson 8: Prepare your RAG LangChain application for production](https://medium.com/decodingml/prepare-your-rag-langchain-application-for-production-5f75021cd381)
-
-
 ## 5. License
 
 This course is an open-source project released under the MIT license. Thus, as long you distribute our LICENSE and acknowledge our work, you can safely clone or fork this project and use it as a source of inspiration for whatever you want (e.g., university projects, college degree projects, etc.).
 
 ## 6. Contributors & Teachers
 
+This course is based on the repository created by the following instructors, for whom we're very grateful:
+
 <table>
   <tr>
     <td><img src="https://github.com/Paulescu.png" width="100" style="border-radius:50%;"/></td>
     <td>
       <strong>Pau Labarta Bajo | Senior ML & MLOps Engineer </strong><br />
-      <i>Main teacher. The guy from the video lessons.</i><br /><br />
       <a href="https://www.linkedin.com/in/pau-labarta-bajo-4432074b/">LinkedIn</a><br />
-      <a href="https://twitter.com/paulabartabajo_">Twitter/X</a><br />
-      <a href="https://www.youtube.com/@realworldml">Youtube</a><br />
-      <a href="https://www.realworldml.xyz/subscribe">Real-World ML Newsletter</a><br />
-      <a href="https://www.realworldml.xyz/subscribe">Real-World ML Site</a>
     </td>
   </tr>
   <tr>
     <td><img src="https://github.com/Joywalker.png" width="100" style="border-radius:50%;"/></td>
     <td>
       <strong>Alexandru Razvant | Senior ML Engineer </strong><br />
-      <i>Second chef. The engineer behind the scenes.</i><br /><br />
       <a href="https://www.linkedin.com/in/arazvant/">LinkedIn</a><br />
-      <a href="https://www.neuraleaps.com/">Neura Leaps</a>
     </td>
   </tr>
   <tr>
     <td><img src="https://github.com/iusztinpaul.png" width="100" style="border-radius:50%;"/></td>
     <td>
       <strong>Paul Iusztin | Senior ML & MLOps Engineer </strong><br />
-      <i>Main chef. The guys who randomly pop in the video lessons.</i><br /><br />
       <a href="https://www.linkedin.com/in/pauliusztin/">LinkedIn</a><br />
-      <a href="https://twitter.com/iusztinpaul">Twitter/X</a><br />
-      <a href="https://pauliusztin.substack.com/">Decoding ML Newsletter</a><br />
-      <a href="https://www.pauliusztin.me/">Personal Site | ML & MLOps Hub</a>
     </td>
   </tr>
 </table>

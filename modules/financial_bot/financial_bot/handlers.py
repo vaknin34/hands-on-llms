@@ -42,7 +42,7 @@ class CometLLMMonitoringHandler(BaseCallbackHandler):
         """
 
         should_log_prompt = "metadata" in kwargs
-        if should_log_prompt:
+        if False:    # should_log_prompt:    # Disable, as comet_llm.log_prompt() is not working as expected.
             metadata = kwargs["metadata"]
 
             comet_llm.log_prompt(

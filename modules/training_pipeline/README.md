@@ -55,13 +55,13 @@ Prepare credentials:
 ```shell
 cp .env.example .env
 ```
---> and complete the `.env` file with your [external services credentials](https://github.com/iusztinpaul/hands-on-llms/tree/main#2-setup-external-services).
+--> and complete the `.env` file with your [external services credentials](https://github.com/ishai-rosenberg/hands-on-llms/tree/main#2-setup-external-services).
 
 
 ## 2.2. Beam
 `deploy the training pipeline to Beam [optional]` 
 
-**First**, you must set up Beam, as explained in the [Setup External Services](https://github.com/iusztinpaul/hands-on-llms/tree/main#2-setup-external-services) section.
+**First**, you must set up Beam, as explained in the [Setup External Services](https://github.com/ishai-rosenberg/hands-on-llms/tree/main#2-setup-external-services) section.
 
 In addition to setting up Beam, you have to go to your [Beam account](https://www.beam.cloud?utm_source=thepauls&utm_medium=partner&utm_content=github) and create a volume, as follows:
 1. go to the `Volumes` section

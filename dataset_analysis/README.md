@@ -42,4 +42,4 @@ Here are the key steps of our EDA (Exploratory Data Analysis) on the prompts of 
 ![EDA](../media/eda_prompts_dataset.png)
 
 ### Learn More
-→ Check out the EDA notebook at [dataset_analysis/prompts_eda.ipynb](https://github.com/iusztinpaul/hands-on-llms/blob/main/dataset_analysis/prompts_eda.ipynb) to see the complete analysis.  
+→ Check out the EDA notebook at [dataset_analysis/prompts_eda.ipynb](https://github.com/ishai-rosenberg/hands-on-llms/blob/main/dataset_analysis/prompts_eda.ipynb) to see the complete analysis.  

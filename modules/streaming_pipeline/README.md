@@ -61,20 +61,20 @@ Prepare credentials:
 ```shell
 cp .env.example .env
 ```
---> and complete the `.env` file with your [external services credentials](https://github.com/iusztinpaul/hands-on-llms/tree/main#2-setup-external-services).
+--> and complete the `.env` file with your [external services credentials](https://github.com/ishai-rosenberg/hands-on-llms/tree/main#2-setup-external-services).
 
 
 ## 2.2. Alpaca & Qdrant
 
-Check out the [Setup External Services](https://github.com/iusztinpaul/hands-on-llms/tree/main#2-setup-external-services) section to see how to create API keys for them.
+Check out the [Setup External Services](https://github.com/ishai-rosenberg/hands-on-llms/tree/main#2-setup-external-services) section to see how to create API keys for them.
 
 
 ## 2.3. AWS CLI
 `deploy the streaming pipeline to AWS [optional]` 
 
 You can deploy the streaming pipeline to AWS in 2 ways:
-1. **running Make commands**: install & configure your [AWS CLI 2.11.22](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) as explained in the [Setup External Services](https://github.com/iusztinpaul/hands-on-llms/tree/main#2-setup-external-services) section
-2. **using the GitHub Actions CI/CD pipeline**: only create an account and generate a pair of credentials as explained in the [Setup External Services](https://github.com/iusztinpaul/hands-on-llms/tree/main#2-setup-external-services) section
+1. **running Make commands**: install & configure your [AWS CLI 2.11.22](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) as explained in the [Setup External Services](https://github.com/ishai-rosenberg/hands-on-llms/tree/main#2-setup-external-services) section
+2. **using the GitHub Actions CI/CD pipeline**: only create an account and generate a pair of credentials as explained in the [Setup External Services](https://github.com/ishai-rosenberg/hands-on-llms/tree/main#2-setup-external-services) section
 
 
 # 3. Usage
@@ -85,6 +85,8 @@ Run the streaming pipeline in `real-time` and `production` modes:
 ```shell
 make run_real_time
 ```
+
+**NOTE:** If not working, the business logic of run_real_time_dev can be inspected instead.
 
 To populate the vector DB, you can ingest historical data from the latest 8 days by running the streaming pipeline in `batch` and `production` modes:
 ```shell

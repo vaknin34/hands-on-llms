@@ -185,7 +185,7 @@ class InferenceAPI:
         end_time = time.time()
         duration_milliseconds = (end_time - start_time) * 1000
 
-        if not self._debug:
+        if False:    # not self._debug:    # Disable to prevent code crash
             comet_llm.log_prompt(
                 project=f"{comet_project_name}-{self._name}-monitor-prompts",
                 prompt=infer_prompt,

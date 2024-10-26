@@ -60,11 +60,11 @@ Prepare credentials:
 ```shell
 cp .env.example .env
 ```
---> and complete the `.env` file with your [external services credentials](https://github.com/iusztinpaul/hands-on-llms/tree/main#2-setup-external-services).
+--> and complete the `.env` file with your [external services credentials](https://github.com/ishai-rosenberg/hands-on-llms/tree/main#2-setup-external-services).
 
 ## 2.2. Qdrant & Beam
 
-Check out the [Setup External Services](https://github.com/iusztinpaul/hands-on-llms/tree/main#2-setup-external-services) section to see how to create API keys for them.
+Check out the [Setup External Services](https://github.com/ishai-rosenberg/hands-on-llms/tree/main#2-setup-external-services) section to see how to create API keys for them.
 
 
 # 3. Usage
@@ -84,7 +84,7 @@ make run_dev
 ## 3.2. Beam | RESTful API
 `deploy the financial bot as a RESTful API to Beam [optional]` 
 
-**First**, you must set up Beam, as explained in the [Setup External Services](https://github.com/iusztinpaul/hands-on-llms/tree/main#2-setup-external-services) section.
+**First**, you must set up Beam, as explained in the [Setup External Services](https://github.com/ishai-rosenberg/hands-on-llms/tree/main#2-setup-external-services) section.
 
 Deploy the bot under a RESTful API using Beam:
 ```shell
