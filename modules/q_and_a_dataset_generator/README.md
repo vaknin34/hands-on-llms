@@ -11,7 +11,7 @@ This dataset should resemble as much as possible the actual questions, and answe
 
 ## Quick set up
 
-* Set up virtual env using Poetry
+* Set up virtual env using Poetry (if you get an error message that poetry.lock is out of date, run `poetry lock --no-update` and then re-run):
     ```
     $ make init
     ```
