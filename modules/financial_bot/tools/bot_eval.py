@@ -68,6 +68,13 @@ def run_local(
 
     with open(testset_path, "r") as f:
         data = json.load(f)
+        aggregate_score = {
+            'ragas_score': 0.0000,
+            'context_relevancy': 0.0000,
+            'context_recall': 0.0000,
+            'answer_similarity': 0.0000,
+            'faithfulness': 0.0000
+        }
         for elem in data:
             input_payload = {
                 "about_me": elem["about_me"],
@@ -76,9 +83,19 @@ def run_local(
             }
             output_context = bot.finbot_chain.chains[0].run(input_payload)
             response = bot.answer(**input_payload)
-            logger.info("Score=%s", evaluate_w_ragas(query=elem["question"], context=output_context.split('\n'), output=response, ground_truth=elem["response"], metrics=metrics))
+            ragas_score = evaluate_w_ragas(query=elem["question"], context=output_context.split('\n'), output=response, ground_truth=elem["response"], metrics=metrics)
+            
+            # Update the aggregate score
+            for key in aggregate_score:
+                aggregate_score[key] += ragas_score[key]
 
-    return response
+            logger.info("Score=%s", ragas_score)
+        
+        # Calculate the average score
+        for key in aggregate_score:
+            aggregate_score[key] /= len(data)
+
+    return aggregate_score
 
 
 if __name__ == "__main__":
