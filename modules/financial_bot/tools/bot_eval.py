@@ -75,6 +75,7 @@ def run_local(
             'answer_similarity': 0.0000,
             'faithfulness': 0.0000
         }
+        start = 1
         for elem in data:
             input_payload = {
                 "about_me": elem["about_me"],
@@ -89,7 +90,11 @@ def run_local(
             for key in aggregate_score:
                 aggregate_score[key] += ragas_score[key]
 
+            # Log the score
             logger.info("Score=%s", ragas_score)
+            # Log the iteration number
+            logger.info(f"Iteration={start} of {len(data)}")
+            start += 1
         
         # Calculate the average score
         for key in aggregate_score:
