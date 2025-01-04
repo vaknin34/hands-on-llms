@@ -6,7 +6,7 @@ from typing import List, Optional, Tuple
 import torch
 from comet_ml import API
 from langchain.llms import HuggingFacePipeline
-from peft import LoraConfig, PeftConfig, PeftModel
+from peft import LoraConfig, PeftConfig, PeftModel, get_peft_model, prepare_model_for_kbit_training
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
@@ -110,7 +110,7 @@ def build_huggingface_pipeline(
     use_streamer: bool = False,
     cache_dir: Optional[Path] = None,
     debug: bool = False,
-) -> Tuple[HuggingFacePipeline, Optional[TextIteratorStreamer]]:
+) -> Tuple[HuggingFacePipeline, Optional[TextIteratorStreamer], AutoModelForCausalLM]:
     """
     Builds a HuggingFace pipeline for text generation using a custom LLM + Finetuned checkpoint.
 
@@ -145,6 +145,8 @@ def build_huggingface_pipeline(
     )
     model.eval()
 
+    
+
     if use_streamer:
         streamer = TextIteratorStreamer(
             tokenizer, timeout=10.0, skip_prompt=True, skip_special_tokens=True
@@ -166,7 +168,7 @@ def build_huggingface_pipeline(
     )
     hf = HuggingFacePipeline(pipeline=pipe)
 
-    return hf, streamer
+    return hf, streamer, model
 
 
 def build_qlora_model(

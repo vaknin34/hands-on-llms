@@ -71,7 +71,7 @@ class FinancialBot:
         self._embd_model = EmbeddingModelSingleton(
             cache_dir=model_cache_dir, device=embedding_model_device
         )
-        self._llm_agent, self._streamer = build_huggingface_pipeline(
+        self._llm_agent, self._streamer, self.model = build_huggingface_pipeline(
             llm_model_id=llm_model_id,
             llm_lora_model_id=llm_qlora_model_id,
             max_new_tokens=llm_inference_max_new_tokens,
