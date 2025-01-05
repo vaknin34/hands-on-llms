@@ -8,7 +8,7 @@ packages = [{include = "financial_bot"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12"
-qdrant-client = "1.1.1"
+qdrant-client = "^1.12.2"
 langchain = "0.0.288"
 comet-ml = "3.35.1"
 transformers = "4.32.0"
@@ -21,27 +21,28 @@ fire = "^0.5.0"
 comet-llm = "^1.1.0"
 bitsandbytes = "^0.41.1"
 torch = "2.0.1"
-beam-sdk = "0.15.9"
 gradio = "^3.48.0"
 unstructured = "^0.10.28"
+ragas = "^0.2.9"
+dspy = "^2.5.43"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
 ruff = "^0.0.285"
-ragas = "0.0.17"
+ragas = "0.2.9"
 datasets = "2.14.5"
 sentence-transformers = "2.3.1"
-openai = "0.28.1"
+openai = "1.55.3"
+
+[[tool.poetry.source]]
+name = "pypi"
+priority = "primary"
+
 
 [[tool.poetry.source]]
 name = "torch"
 url = "https://download.pytorch.org/whl/cu118"
 priority = "supplemental"
-
-
-[[tool.poetry.source]]
-name = "PyPI"
-priority = "primary"
 
 
 [build-system]

@@ -56,6 +56,11 @@ eval_bot:
 	poetry run python -m tools.bot_eval \
 		--testset_path "../training_pipeline/dataset/testing_data.json"
 
+dspy_optimization:
+	@echo "dspy optimization..."
+
+	poetry run python -m tools.dspy_optimization
+
 
 # === Beam ===
 
