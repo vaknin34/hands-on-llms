@@ -120,10 +120,16 @@ class ContextExtractorChain(Chain):
 
         # TODO: Using the metadata, use the filter to take into consideration only the news from the last 24 hours
         # (or other time frame).
+        # matches = self.vector_store.search(
+        #     query_vector=embeddings,
+        #     k=self.top_k,
+        #     collection_name=self.vector_collection,
+        # )
+
         matches = self.vector_store.search(
-            query_vector=embeddings,
-            k=self.top_k,
             collection_name=self.vector_collection,
+            query_vector=embeddings,
+            limit=self.top_k
         )
 
         context = ""
