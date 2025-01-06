@@ -477,35 +477,34 @@ files = [
 
 [[package]]
 name = "comet-llm"
-version = "2.2.7"
+version = "1.6.0"
 description = "Comet logger for LLM"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "comet_llm-2.2.7-py3-none-any.whl", hash = "sha256:e70f8fca067b8fc576d473f920dac28be97b3222e86e8ae013eca9c0215ad5ef"},
-    {file = "comet_llm-2.2.7.tar.gz", hash = "sha256:3fc5a394055e7042c0e35121df911647fca942a95097beca9cd57c5f50a795cb"},
+    {file = "comet_llm-1.6.0-py3-none-any.whl", hash = "sha256:117226ad4b4c1b2b25b2ee409b0edfd7041087eafe2a22207c704049af5a9e02"},
+    {file = "comet_llm-1.6.0.tar.gz", hash = "sha256:bf9a3e3e548390a4460b05be3a9fc51ce771db8cffbfc2222e1a5823fa0cf416"},
 ]
 
 [package.dependencies]
-comet-ml = ">=3.43.0"
+comet-ml = "*"
 flatten-dict = "*"
 requests = "*"
 types-requests = "*"
 
 [[package]]
 name = "comet-ml"
-version = "3.47.6"
+version = "3.35.1"
 description = "Supercharging Machine Learning"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.5"
 files = [
-    {file = "comet_ml-3.47.6-py3-none-any.whl", hash = "sha256:dec2507fbb8283ee22b021864a38e5c45c13fecc9164e5749a5dc56e8405cb50"},
-    {file = "comet_ml-3.47.6.tar.gz", hash = "sha256:af17fedc89509e25ff95cb996b61c0af80259e4434f6413276c7e46e94bf1a06"},
+    {file = "comet_ml-3.35.1-py3-none-any.whl", hash = "sha256:f5333c8fbaae0917266f4aedf8e1b0dab170483b8333b69ffea44e1f90d28bd1"},
 ]
 
 [package.dependencies]
 dulwich = {version = ">=0.20.6,<0.20.33 || >0.20.33", markers = "python_version >= \"3.0\""}
-everett = {version = ">=1.0.1,<3.2.0", extras = ["ini"]}
+everett = {version = ">=1.0.1,<3.2.0", extras = ["ini"], markers = "python_version > \"3.5\""}
 jsonschema = ">=2.6.0,<3.1.0 || >3.1.0"
 psutil = ">=5.6.3"
 python-box = "<7.0.0"
@@ -515,7 +514,9 @@ rich = {version = ">=13.3.2", markers = "python_version >= \"3.7.0\""}
 semantic-version = ">=2.8.0"
 sentry-sdk = ">=1.1.0"
 simplejson = "*"
+six = "*"
 urllib3 = ">=1.21.1"
+websocket-client = ">=0.55.0,<1.4.0"
 wrapt = ">=1.11.2"
 wurlitzer = ">=1.0.2"
 
@@ -2791,25 +2792,6 @@ test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=8.3.2)", "pytest-
 type = ["mypy (>=1.11.2)"]
 
 [[package]]
-name = "portalocker"
-version = "2.10.1"
-description = "Wraps the portalocker recipe for easy usage"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "portalocker-2.10.1-py3-none-any.whl", hash = "sha256:53a5984ebc86a025552264b459b46a2086e269b21823cb572f8f28ee759e45bf"},
-    {file = "portalocker-2.10.1.tar.gz", hash = "sha256:ef1bf844e878ab08aee7e40184156e1151f228f103aa5c6bd0724cc330960f8f"},
-]
-
-[package.dependencies]
-pywin32 = {version = ">=226", markers = "platform_system == \"Windows\""}
-
-[package.extras]
-docs = ["sphinx (>=1.7.1)"]
-redis = ["redis"]
-tests = ["pytest (>=5.4.1)", "pytest-cov (>=2.8.1)", "pytest-mypy (>=0.8.0)", "pytest-timeout (>=2.1.0)", "redis", "sphinx (>=6.0.0)", "types-redis"]
-
-[[package]]
 name = "propcache"
 version = "0.2.1"
 description = "Accelerated property cache"
@@ -3223,33 +3205,6 @@ files = [
 ]
 
 [[package]]
-name = "pywin32"
-version = "308"
-description = "Python for Window Extensions"
-optional = false
-python-versions = "*"
-files = [
-    {file = "pywin32-308-cp310-cp310-win32.whl", hash = "sha256:796ff4426437896550d2981b9c2ac0ffd75238ad9ea2d3bfa67a1abd546d262e"},
-    {file = "pywin32-308-cp310-cp310-win_amd64.whl", hash = "sha256:4fc888c59b3c0bef905ce7eb7e2106a07712015ea1c8234b703a088d46110e8e"},
-    {file = "pywin32-308-cp310-cp310-win_arm64.whl", hash = "sha256:a5ab5381813b40f264fa3495b98af850098f814a25a63589a8e9eb12560f450c"},
-    {file = "pywin32-308-cp311-cp311-win32.whl", hash = "sha256:5d8c8015b24a7d6855b1550d8e660d8daa09983c80e5daf89a273e5c6fb5095a"},
-    {file = "pywin32-308-cp311-cp311-win_amd64.whl", hash = "sha256:575621b90f0dc2695fec346b2d6302faebd4f0f45c05ea29404cefe35d89442b"},
-    {file = "pywin32-308-cp311-cp311-win_arm64.whl", hash = "sha256:100a5442b7332070983c4cd03f2e906a5648a5104b8a7f50175f7906efd16bb6"},
-    {file = "pywin32-308-cp312-cp312-win32.whl", hash = "sha256:587f3e19696f4bf96fde9d8a57cec74a57021ad5f204c9e627e15c33ff568897"},
-    {file = "pywin32-308-cp312-cp312-win_amd64.whl", hash = "sha256:00b3e11ef09ede56c6a43c71f2d31857cf7c54b0ab6e78ac659497abd2834f47"},
-    {file = "pywin32-308-cp312-cp312-win_arm64.whl", hash = "sha256:9b4de86c8d909aed15b7011182c8cab38c8850de36e6afb1f0db22b8959e3091"},
-    {file = "pywin32-308-cp313-cp313-win32.whl", hash = "sha256:1c44539a37a5b7b21d02ab34e6a4d314e0788f1690d65b48e9b0b89f31abbbed"},
-    {file = "pywin32-308-cp313-cp313-win_amd64.whl", hash = "sha256:fd380990e792eaf6827fcb7e187b2b4b1cede0585e3d0c9e84201ec27b9905e4"},
-    {file = "pywin32-308-cp313-cp313-win_arm64.whl", hash = "sha256:ef313c46d4c18dfb82a2431e3051ac8f112ccee1a34f29c263c583c568db63cd"},
-    {file = "pywin32-308-cp37-cp37m-win32.whl", hash = "sha256:1f696ab352a2ddd63bd07430080dd598e6369152ea13a25ebcdd2f503a38f1ff"},
-    {file = "pywin32-308-cp37-cp37m-win_amd64.whl", hash = "sha256:13dcb914ed4347019fbec6697a01a0aec61019c1046c2b905410d197856326a6"},
-    {file = "pywin32-308-cp38-cp38-win32.whl", hash = "sha256:5794e764ebcabf4ff08c555b31bd348c9025929371763b2183172ff4708152f0"},
-    {file = "pywin32-308-cp38-cp38-win_amd64.whl", hash = "sha256:3b92622e29d651c6b783e368ba7d6722b1634b8e70bd376fd7610fe1992e19de"},
-    {file = "pywin32-308-cp39-cp39-win32.whl", hash = "sha256:7873ca4dc60ab3287919881a7d4f88baee4a6e639aa6962de25a98ba6b193341"},
-    {file = "pywin32-308-cp39-cp39-win_amd64.whl", hash = "sha256:71b3322d949b4cc20776436a9c9ba0eeedcbc9c650daa536df63f0ff111bb920"},
-]
-
-[[package]]
 name = "pyyaml"
 version = "6.0.2"
 description = "YAML parser and emitter for Python"
@@ -3313,13 +3268,13 @@ files = [
 
 [[package]]
 name = "qdrant-client"
-version = "1.4.0"
+version = "1.1.1"
 description = "Client library for the Qdrant vector search engine"
 optional = false
 python-versions = ">=3.7,<3.12"
 files = [
-    {file = "qdrant_client-1.4.0-py3-none-any.whl", hash = "sha256:2f9e563955b5163da98016f2ed38d9aea5058576c7c5844e9aa205d28155f56d"},
-    {file = "qdrant_client-1.4.0.tar.gz", hash = "sha256:2e54f5a80eb1e7e67f4603b76365af4817af15fb3d0c0f44de4fd93afbbe5537"},
+    {file = "qdrant_client-1.1.1-py3-none-any.whl", hash = "sha256:aff82046efcfc4146e09b83934e2bb062c2cb850458567393865330151c890d3"},
+    {file = "qdrant_client-1.1.1.tar.gz", hash = "sha256:bc4ede60ad67e3763daf7c66b361c7ab118840412dd3428b019365ef0adcae95"},
 ]
 
 [package.dependencies]
@@ -3327,8 +3282,8 @@ grpcio = ">=1.41.0"
 grpcio-tools = ">=1.41.0"
 httpx = {version = ">=0.14.0", extras = ["http2"]}
 numpy = {version = ">=1.21", markers = "python_version >= \"3.8\""}
-portalocker = ">=2.7.0,<3.0.0"
-pydantic = ">=1.10.8"
+pydantic = ">=1.8,<2.0"
+typing-extensions = ">=4.0.0,<5.0.0"
 urllib3 = ">=1.26.14,<2.0.0"
 
 [[package]]
@@ -4867,6 +4822,22 @@ typing-extensions = {version = ">=4.0", markers = "python_version < \"3.11\""}
 standard = ["colorama (>=0.4)", "httptools (>=0.6.3)", "python-dotenv (>=0.13)", "pyyaml (>=5.1)", "uvloop (>=0.14.0,!=0.15.0,!=0.15.1)", "watchfiles (>=0.13)", "websockets (>=10.4)"]
 
 [[package]]
+name = "websocket-client"
+version = "1.3.3"
+description = "WebSocket client for Python with low level API options"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "websocket-client-1.3.3.tar.gz", hash = "sha256:d58c5f284d6a9bf8379dab423259fe8f85b70d5fa5d2916d5791a84594b122b1"},
+    {file = "websocket_client-1.3.3-py3-none-any.whl", hash = "sha256:5d55652dc1d0b3c734f044337d929aaf83f4f9138816ec680c1aefefb4dc4877"},
+]
+
+[package.extras]
+docs = ["Sphinx (>=3.4)", "sphinx-rtd-theme (>=0.5)"]
+optional = ["python-socks", "wsaccel"]
+test = ["websockets"]
+
+[[package]]
 name = "websockets"
 version = "11.0.3"
 description = "An implementation of the WebSocket Protocol (RFC 6455 & 7692)"
@@ -5261,4 +5232,4 @@ propcache = ">=0.2.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.12"
-content-hash = "fc0c5466466bbbda0ce57069ed128336a2549911b49a775b794d0dd910923ae3"
+content-hash = "7895c315910d3d7edee39caa2b0bfd83b974692194a6a19e9ef0dedfade2eb83"

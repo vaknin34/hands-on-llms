@@ -129,7 +129,7 @@ class ContextExtractorChain(Chain):
         matches = self.vector_store.search(
             collection_name=self.vector_collection,
             query_vector=embeddings,
-            limit=self.top_k
+            k=self.top_k
         )
 
         context = ""
