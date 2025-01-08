@@ -66,7 +66,12 @@ def run_local(
         faithfulness
     ]
 
-    metric_sums = {metric.__name__: 0.0 for metric in metrics}
+    metric_sums = {
+        "context_relevancy": 0.0,
+        "context_recall": 0.0,
+        "answer_similarity": 0.0,
+        "faithfulness": 0.0
+    }
     num_iterations = 0
 
     with open(testset_path, "r") as f:
