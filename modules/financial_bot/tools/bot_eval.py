@@ -94,7 +94,8 @@ def run_local(
             )
             logger.info("Iteration=%d, Score=%s", num_iterations, score)
             for metric_name, metric_value in score.items():
-                metric_sums[metric_name] += metric_value
+                if metric_name in metric_sums:
+                    metric_sums[metric_name] += metric_value
 
     mean_metrics = {metric: total / num_iterations for metric, total in metric_sums.items()}
     logger.info("Mean metrics: %s", mean_metrics)
