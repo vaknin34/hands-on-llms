@@ -66,9 +66,13 @@ def run_local(
         faithfulness
     ]
 
+    metric_sums = {metric.__name__: 0.0 for metric in metrics}
+    num_iterations = 0
+
     with open(testset_path, "r") as f:
         data = json.load(f)
         for elem in data:
+            num_iterations += 1
             input_payload = {
                 "about_me": elem["about_me"],
                 "question": elem["question"],
@@ -76,7 +80,19 @@ def run_local(
             }
             output_context = bot.finbot_chain.chains[0].run(input_payload)
             response = bot.answer(**input_payload)
-            logger.info("Score=%s", evaluate_w_ragas(query=elem["question"], context=output_context.split('\n'), output=response, ground_truth=elem["response"], metrics=metrics))
+            score = evaluate_w_ragas(
+                query=elem["question"],
+                context=output_context.split('\n'),
+                output=response,
+                ground_truth=elem["response"],
+                metrics=metrics
+            )
+            logger.info("Iteration=%d, Score=%s", num_iterations, score)
+            for metric_name, metric_value in score.items():
+                metric_sums[metric_name] += metric_value
+
+    mean_metrics = {metric: total / num_iterations for metric, total in metric_sums.items()}
+    logger.info("Mean metrics: %s", mean_metrics)
 
     return response
 
