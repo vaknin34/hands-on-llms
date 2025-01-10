@@ -1,0 +1,27 @@
+[project]
+name = "dspy-prompt-optimization"
+version = "0.0.0"
+description = "Dspy module to support both prompt optimization and build optimizer pipelines"
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "pydantic (>=2.10.5,<3.0.0)",
+    "langchain-openai (>=0.2.14,<0.3.0)",
+    "setuptools (>=75.8.0,<76.0.0)",
+    "python-dotenv (>=1.0.1,<2.0.0)"
+]
+packeges = [
+    {include = "dspy_prompt_optimization"}
+]
+
+[project.scripts]
+generate_data = "dspy_prompt_optimization.generate_dspy_data:main"
+build_optimizer = "dspy_prompt_optimization.build_optimizer:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

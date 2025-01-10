@@ -7,6 +7,11 @@ import fire
 from datasets import Dataset
 
 from tools.bot import load_bot
+import subprocess
+
+target_directory = "/Users/nivvaknin/Desktop/hands-on-llms/modules/dspy_prompt_optimization"
+command = "poetry run generate_data --help'"
+
 
 logger = logging.getLogger(__name__)
 
@@ -96,6 +101,19 @@ def run_local(
             for metric_name, metric_value in score.items():
                 if metric_name in metric_sums:
                     metric_sums[metric_name] += metric_value
+            
+
+            result = subprocess.run(
+            command,
+            cwd=target_directory,
+            shell=True,
+            capture_output=True,
+            text=True
+            )
+            print("STDOUT:\n", result.stdout)
+            print("STDERR:\n", result.stderr)
+            print("Return code:", result.returncode)
+            
 
     mean_metrics = {metric: total / num_iterations for metric, total in metric_sums.items()}
     logger.info("Mean metrics: %s", mean_metrics)
