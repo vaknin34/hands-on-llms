@@ -9,8 +9,8 @@ from datasets import Dataset
 from tools.bot import load_bot
 import subprocess
 
-target_directory = "/Users/nivvaknin/Desktop/hands-on-llms/modules/dspy_prompt_optimization"
-command = "poetry run generate_data --help'"
+target_directory = "../dspy_prompt_optimization"
+command = "poetry run generate_data --help"
 
 
 logger = logging.getLogger(__name__)
