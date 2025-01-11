@@ -16,10 +16,6 @@ def parse_args():
                         help="Path to the JSON data file (e.g., data_for_dspy.json).")
     parser.add_argument("--output_path", type=str, required=True, 
                         help="Directory or filename prefix where the optimized model/program will be saved.")
-    parser.add_argument("--api_key", type=str, default="",
-                        help="API key for the chosen LM backend (e.g., OpenAI). If empty, uses environment variables/config.")
-    parser.add_argument("--model_name", type=str, default="openai/gpt-4",
-                        help="Model name for dspy.LM. Default is 'openai/gpt-4'.")
     return parser.parse_args()
 
 ###############################################
@@ -58,7 +54,7 @@ def main():
     args = parse_args()
 
     # Configure the LM in DSPy
-    lm = dspy.LM(args.model_name, api_key=args.api_key)
+    lm = dspy.LM("openai/gpt-4")
     dspy.configure(lm=lm)
 
     # A basic ChainOfThought structure: "question -> answer"
@@ -75,19 +71,18 @@ def main():
         question = (d["about_me"] + " " + d["context"] + " " + d["question"])
         answer = d["response"]
         dataset.append(dspy.Example(question=question, answer=answer).with_inputs("question"))
-
-    # Split into train/test
-    split_idx = int(len(dataset) * 0.8)
-    train_data = dataset[:split_idx]
-    test_data  = dataset[split_idx:]
+    
+    # TODO: remove this line
+    dataset = dataset[:10]
 
     # Create an evaluator for the dev/test set
     evaluate = Evaluate(
-        devset=test_data,
+        devset=dataset,
         metric=evaluate_faithfulness,
         num_threads=8,
         display_progress=True,
-        display_table=False
+        display_table=False,
+        max_errors=len(dataset),
     )
 
     # Evaluate the unoptimized program (optional, but good for baseline)
@@ -105,7 +100,7 @@ def main():
     print("=== Optimizing program with MIPROv2... ===")
     optimized_program = teleprompter.compile(
         cot.deepcopy(),
-        trainset=train_data,
+        trainset=dataset,
         max_bootstrapped_demos=3,
         max_labeled_demos=4,
         requires_permission_to_run=False,
@@ -117,16 +112,8 @@ def main():
 
     # Evaluate the optimized program
     print("=== Evaluate optimized program on test set ===")
-    optimized_score = evaluate(optimized_program, devset=test_data)
+    optimized_score = evaluate(optimized_program, devset=dataset)
     print(f"Optimized program evaluation score: {optimized_score:.4f}\n")
-
-    # Demonstrate inference on a sample
-    print("=== Sample inference with the optimized program ===")
-    sample_question = test_data[0].question
-    print(f"Question: {sample_question}")
-    sample_result = optimized_program(question=sample_question)
-    print(f"Reasoning: {sample_result.reasoning}")
-    print(f"Answer: {sample_result.answer}\n")
 
     print("=== Done! ===")
 
