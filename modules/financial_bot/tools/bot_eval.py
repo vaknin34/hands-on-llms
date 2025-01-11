@@ -1,5 +1,6 @@
 import logging
 import json
+import os
 
 import fire
 
@@ -51,11 +52,15 @@ def run_local(
 
     bot = load_bot(model_cache_dir=None)
 
+    copy_current_env = os.environ.copy()
+    if "VIRTUAL_ENV" in copy_current_env:
+        del copy_current_env["VIRTUAL_ENV"]
     result = subprocess.run(
-    command.split(),
-    cwd=target_directory,
-    capture_output=True,
-    text=True
+        command.split(),
+        cwd=target_directory,
+        capture_output=True,
+        text=True,
+        env=copy_current_env,
     )
     print("STDOUT:\n", result.stdout)
     print("STDERR:\n", result.stderr)
