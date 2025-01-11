@@ -52,6 +52,7 @@ def run_local(
 
     bot = load_bot(model_cache_dir=None)
 
+    # TODO: Move this block to the financial_bot module
     copy_current_env = os.environ.copy()
     if "VIRTUAL_ENV" in copy_current_env:
         del copy_current_env["VIRTUAL_ENV"]
@@ -65,7 +66,6 @@ def run_local(
     print("STDOUT:\n", result.stdout)
     print("STDERR:\n", result.stderr)
     print("Return code:", result.returncode)
-
 
     # Import ragas only after loading the environment variables inside load_bot()
     from ragas.metrics import (
