@@ -104,9 +104,8 @@ def run_local(
             
 
             result = subprocess.run(
-            command,
+            command.split(),
             cwd=target_directory,
-            shell=True,
             capture_output=True,
             text=True
             )
