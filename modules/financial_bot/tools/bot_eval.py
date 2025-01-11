@@ -50,6 +50,18 @@ def run_local(
     """
 
     bot = load_bot(model_cache_dir=None)
+
+    result = subprocess.run(
+    command.split(),
+    cwd=target_directory,
+    capture_output=True,
+    text=True
+    )
+    print("STDOUT:\n", result.stdout)
+    print("STDERR:\n", result.stderr)
+    print("Return code:", result.returncode)
+
+
     # Import ragas only after loading the environment variables inside load_bot()
     from ragas.metrics import (
         answer_correctness,
@@ -101,17 +113,6 @@ def run_local(
             for metric_name, metric_value in score.items():
                 if metric_name in metric_sums:
                     metric_sums[metric_name] += metric_value
-            
-
-            result = subprocess.run(
-            command.split(),
-            cwd=target_directory,
-            capture_output=True,
-            text=True
-            )
-            print("STDOUT:\n", result.stdout)
-            print("STDERR:\n", result.stderr)
-            print("Return code:", result.returncode)
             
 
     mean_metrics = {metric: total / num_iterations for metric, total in metric_sums.items()}
