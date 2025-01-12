@@ -1,49 +1,45 @@
 # DSPy Prompt Optimization
 
-A Python package for optimizing Large Language Model (LLM) prompts using DSPy framework. This tool helps developers automatically fine-tune and improve their prompting strategies for better and more consistent LLM responses.
+A comprehensive toolkit for developing, optimizing, and evaluating prompts using [DSPy](https://github.com/allenai/dspy). This project streamlines prompt engineering workflows through Python scripts and Poetry dependency management.
 
-## Description
-
-DSPy Prompt Optimization provides a systematic approach to optimize prompts for Large Language Models. It leverages the DSPy framework to:
-- Automatically discover effective prompting patterns
-- Improve prompt reliability and consistency
-- Reduce manual prompt engineering effort
-- Enable data-driven prompt optimization
+## Features
+- **build_optimizer.py**: Robust command-line tool that evaluates unoptimized ChainOfThought prompts and generates optimized versions using MIPROv2 algorithm
+- **prompt_optimizer.py**: Production-ready script for refining prompts using pre-trained optimizers with contextual awareness
+- **generate_dspy_data.py**: Automated synthetic training data generation through language model interactions
 
 ## Installation
+1. Install Poetry package manager:
+    ```bash
+    curl -sSL https://install.python-poetry.org | python3 -
+    ```
+2. Set up project dependencies:
+    ```bash
+    poetry install
+    ```
 
-Install the package using pip:
-
+## Usage
+### Build an Optimizer
+Create an optimized prompt model:
 ```bash
-pip install dspy-prompt-optimization
+poetry run build_optimizer --data_path data_for_dspy.json --output_path my_optimizer.json
 ```
 
-Or using Poetry:
-
+### Optimize Prompts
+Refine prompts with trained optimizer:
 ```bash
-poetry add dspy-prompt-optimization
+poetry run prompt_optimizer --prompt '{"about_me":"...", "context":"...", "question":"..."}'
 ```
 
-## Basic Usage
-
-```python
-from dspy_prompt_optimization import PromptOptimizer
-
-# Initialize the optimizer
-optimizer = PromptOptimizer()
-
-# Define your initial prompt
-initial_prompt = "Summarize the following text:"
-
-# Optimize the prompt using your training data
-optimized_prompt = optimizer.optimize(
-    initial_prompt=initial_prompt,
-    training_data=your_training_data
-)
-
-# Use the optimized prompt
-results = optimizer.generate(optimized_prompt, input_text)
+### Generate Training Data
+Create synthetic datasets:
+```bash
+poetry run generate_data --data_path ./data --output_path ./output.json
 ```
 
-For more detailed examples and advanced usage, please refer to the documentation.
-
+## Project Structure
+- **dspy_prompt_optimization/**: Core implementation files
+  - Prompt generation utilities
+  - Optimization algorithms
+  - Evaluation frameworks
+- **pyproject.toml**: Poetry configuration and dependency specifications
+- **README.md**: Documentation and setup guide
