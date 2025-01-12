@@ -1,7 +1,10 @@
 import dspy
 import argparse
 import json
+import dotenv
 from pathlib import Path
+
+dotenv.load_dotenv()
 
 PATH_TO_OPTIMIZER = Path(__file__).parent / "optimizer" / "new_mipro_optimizer.json"
 

@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-
 import argparse
 import json
 import dspy
+import dotenv
 import dspy.evaluate
 from dspy.evaluate import Evaluate
 from dspy.teleprompt import MIPROv2
+
+dotenv.load_dotenv()
 
 ###############################################
 # 1. Parse command-line arguments
