@@ -126,7 +126,7 @@ class FinancialBot:
         )
 
         logger.info("Building 2/4 - DSPYOptimizationChain")
-        dspy_optimization_chain = DSPYOptimizationChain()
+        #dspy_optimization_chain = DSPYOptimizationChain()
 
         logger.info("Building 3/4 - FinancialBotQAChain")
         if self._debug:
@@ -162,7 +162,8 @@ class FinancialBot:
                 output_key="answer",
                 k=3,
             ),
-            chains=[context_retrieval_chain, dspy_optimization_chain, llm_generator_chain],
+            #chains=[context_retrieval_chain, dspy_optimization_chain, llm_generator_chain],
+            chains=[context_retrieval_chain, llm_generator_chain],
             input_variables=["about_me", "question", "to_load_history"],
             output_variables=["answer"],
             verbose=True,
