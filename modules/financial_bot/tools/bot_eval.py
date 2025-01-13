@@ -1,17 +1,11 @@
 import logging
 import json
-import os
 
 import fire
-
 
 from datasets import Dataset
 
 from tools.bot import load_bot
-import subprocess
-
-target_directory = "../dspy_prompt_optimization"
-command = "poetry run generate_data --help"
 
 
 logger = logging.getLogger(__name__)
@@ -51,21 +45,6 @@ def run_local(
     """
 
     bot = load_bot(model_cache_dir=None)
-
-    # TODO: Move this block to the financial_bot module
-    copy_current_env = os.environ.copy()
-    if "VIRTUAL_ENV" in copy_current_env:
-        del copy_current_env["VIRTUAL_ENV"]
-    result = subprocess.run(
-        command.split(),
-        cwd=target_directory,
-        capture_output=True,
-        text=True,
-        env=copy_current_env,
-    )
-    print("STDOUT:\n", result.stdout)
-    print("STDERR:\n", result.stderr)
-    print("Return code:", result.returncode)
 
     # Import ragas only after loading the environment variables inside load_bot()
     from ragas.metrics import (
