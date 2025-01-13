@@ -149,7 +149,7 @@ def build_huggingface_pipeline(
         # streamer = TextIteratorStreamer(
         #     tokenizer, timeout=10.0, skip_prompt=True, skip_special_tokens=True
         # )
-        streamer = TextIteratorStreamer(tokenizer, skip_prompt=True)
+        streamer = TextIteratorStreamer(tokenizer, skip_prompt=True, skip_special_tokens=True)
         stop_on_tokens = StopOnTokens(stop_ids=[tokenizer.eos_token_id])
         stopping_criteria = StoppingCriteriaList([stop_on_tokens])
     else:
