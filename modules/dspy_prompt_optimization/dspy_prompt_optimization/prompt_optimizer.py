@@ -36,7 +36,7 @@ def main():
     prompt: dict = args.prompt
 
     # Configure the LM in DSPy
-    lm = dspy.LM("openai/gpt-4-0613")
+    lm = dspy.LM("openai/gpt-4o-mini")
     dspy.configure(lm=lm)
 
     cot = dspy.ChainOfThought("question -> answer")
