@@ -170,11 +170,12 @@ class DSPYOptimizationChain(Chain):
 
         return ["about_me", "context", "question"]
 
-    # @property
-    # def output_keys(self) -> List[str]:
-    #     """Returns a list of output keys for the chain"""
+    @property
+    def output_keys(self) -> List[str]:
+        """Returns a list of output keys for the chain"""
 
-    #     return ["about_me", "context", "question"]
+        #return ["about_me", "context", "question"]
+        return []
     
     def _call(
         self,
@@ -234,6 +235,8 @@ class FinancialBotQAChain(Chain):
                 "question": inputs["question"],
             }
         )
+
+        print(prompt)
 
         start_time = time.time()
         response = self.hf_pipeline(prompt["prompt"])
