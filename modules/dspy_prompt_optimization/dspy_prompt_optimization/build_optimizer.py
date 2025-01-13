@@ -9,6 +9,7 @@ from dspy.teleprompt import MIPROv2
 
 dotenv.load_dotenv()
 
+
 ###############################################
 # 1. Parse command-line arguments
 ###############################################
@@ -73,9 +74,6 @@ def main():
         question = (d["about_me"] + " " + d["context"] + " " + d["question"])
         answer = d["response"]
         dataset.append(dspy.Example(question=question, answer=answer).with_inputs("question"))
-    
-    # TODO: remove this line
-    dataset = dataset[:10]
 
     # Create an evaluator for the dev/test set
     evaluate = Evaluate(

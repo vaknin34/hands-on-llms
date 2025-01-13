@@ -1,0 +1,716 @@
+poetry run build_optimizer --data_path dspy_prompt_optimization/dataset/data_for_dspy.json --output_path dspy_prompt_optimization/optimizer/mipro_optimizer_v2.json
+
+=== Baseline evaluation of original ChainOfThought ===
+Average Metric: 76.65 / 112 (68.4%):  56%|███████████████████████████▍                     | 112/200 [31:39<27:27, 18.73s/it]2025/01/12 19:41:19 ERROR dspy.utils.parallelizer: Error processing item Example({'question': "I'm a 47 year old IT professional.\nI'm looking for opportunities in the technology sector. Several tech companies announce advancements in cloud computing services. \nHow do you view the future of cloud computing companies?", 'answer': '\nCloud computing is a rapidly growing sector and is expected to continue to grow in the future. Companies that are investing in cloud computing services are likely to benefit from the increased demand for these services. Investing in these companies now could be a good way to capitalize on the growth of the sector. Additionally, companies that are investing in research and development of new cloud computing services could be a good long-term investment.'}) (input_keys={'question'}): litellm.RateLimitError: AzureException RateLimitError - Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-08-01-preview have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 60 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}. Set `provide_traceback=True` to see the stack trace.
+Average Metric: 136.92 / 199 (68.8%): 100%|████████████████████████████████████████████████| 200/200 [49:52<00:00, 14.96s/it]
+2025/01/12 19:58:44 INFO dspy.evaluate.evaluate: Average Metric: 136.92063492063485 / 200 (68.5%)
+Baseline evaluation score: 68.4600
+
+=== Optimizing program with MIPROv2... ===
+2025/01/12 19:58:44 INFO dspy.teleprompt.mipro_optimizer_v2: 
+RUNNING WITH THE FOLLOWING HEAVY AUTO RUN SETTINGS:
+num_trials: 50
+minibatch: True
+num_candidates: 38
+valset size: 160
+
+2025/01/12 19:58:44 INFO dspy.teleprompt.mipro_optimizer_v2: 
+==> STEP 1: BOOTSTRAP FEWSHOT EXAMPLES <==
+2025/01/12 19:58:44 INFO dspy.teleprompt.mipro_optimizer_v2: These will be used as few-shot example candidates for our program and for creating instructions.
+
+2025/01/12 19:58:44 INFO dspy.teleprompt.mipro_optimizer_v2: Bootstrapping N=38 sets of demonstrations...
+Bootstrapping set 1/38
+Bootstrapping set 2/38
+Bootstrapping set 3/38
+  0%|                                                                                                 | 0/40 [00:00<?, ?it/s]2025/01/12 19:59:36 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a 26 year old investor.\nI want to explore opportunities in emerging markets. Eastern European economies attract investments with improving infrastructure and skilled workforce. \nHow do you view the growth potential of Eastern European markets?", 'answer': '\nEastern European markets have great potential for growth. The improving infrastructure and skilled workforce make them attractive to investors. The region is also home to some of the fastest-growing economies in the world, such as Poland and Romania. Investing in stocks and cryptocurrencies in these markets can be a great way to diversify your portfolio and benefit from the potential for high returns. Additionally, investing in emerging markets can help to reduce risk and provide a hedge against global economic downturns.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x102f4fd80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+  2%|██▏                                                                                      | 1/40 [00:52<33:56, 52.21s/it]2025/01/12 19:59:39 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a 34 year old entrepreneur.\nI'm interested in growth investments with a long-term horizon. Middle Eastern tech startups receive significant venture capital investments. \nDo you think investing in Middle Eastern tech startups is a good idea?", 'answer': '\nYes, investing in Middle Eastern tech startups can be a good idea. The region has seen a surge in venture capital investments, which indicates that there is a lot of potential for growth. Additionally, the region is home to a number of innovative startups that are well-positioned to capitalize on the growing demand for technology in the region. Investing in these startups can be a great way to capitalize on the growth potential of the region.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x102f4fd80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+  5%|████▍                                                                                    | 2/40 [00:54<14:34, 23.01s/it]2025/01/12 19:59:41 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a 30 year old investor.\nI'm intrigued by the growth of renewable energy in emerging markets. African countries invest in solar energy projects to address energy demand and sustainability. \nWhat's your take on investing in solar energy projects in Africa?", 'answer': '\nMy advice is to invest in solar energy projects in Africa. The renewable energy sector is growing rapidly in the region, and the potential for returns is high. Additionally, the projects are likely to have a positive impact on the environment and the local economy. Investing in solar energy projects in Africa is a great way to diversify your portfolio and benefit from the growth of the sector.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x102f4fd80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+  8%|██████▋                                                                                  | 3/40 [00:57<08:22, 13.58s/it]2025/01/12 19:59:43 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a 35-year-old software engineer with a passion for technology.\nI've been following the stock market for years and want to explore trading strategies. Tech companies announce strong earnings.\nGlobal economic uncertainty due to trade tensions.\nInterest rates remain stable. \nShould I invest in tech stocks?", 'answer': '\nConsidering your background in technology and interest in trading strategies, investing in tech stocks could align well with your goals. Positive earnings reports from tech companies and stable interest rates suggest that tech stocks could be a promising investment opportunity. However, be cautious of potential market volatility caused by global economic uncertainties and trade tensions.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x102f4fd80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+ 10%|████████▉                                                                                | 4/40 [00:59<05:28,  9.13s/it]2025/01/12 20:00:38 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a retired financial analyst, and I have a diverse investment portfolio.\nI'm looking for ways to preserve and grow my wealth. Inflation rates are rising.\nPrecious metals, like gold and silver, gaining popularity.\nGovernment announces new economic stimulus package. \nHow can I protect my wealth against inflation?", 'answer': "\nProtecting your wealth against inflation requires a well-diversified approach. While precious metals like gold and silver can act as a hedge against inflation, it's also important to consider other assets like real estate and diversified investment funds. Additionally, staying informed about government policies and economic indicators can help you make strategic decisions to safeguard your wealth."}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x102f4fd80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+ 12%|███████████▏                                                                             | 5/40 [01:53<14:50, 25.45s/it]2025/01/12 20:00:40 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a college student majoring in finance.\nI'm interested in learning about different investment opportunities. Cryptocurrencies gaining mainstream attention.\nStock market experiences a sudden drop.\nNew startups receiving significant venture capital funding. \nWhat are the risks of investing in cryptocurrencies?", 'answer': "\nInvesting in cryptocurrencies can be highly rewarding, but it also comes with significant risks. The volatile nature of crypto markets can lead to substantial price fluctuations, and regulatory uncertainties can impact their legality and value. Moreover, security concerns, such as hacking and fraud, are prevalent in the crypto space. It's crucial to conduct thorough research and understand the risks before investing."}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x102f4fd80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+ 15%|█████████████▎                                                                           | 6/40 [01:56<10:00, 17.66s/it]2025/01/12 20:00:43 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I am a 28 year old marketing professional.\nI have some savings and I'm interested in crypto investments. El Salvador adopts Bitcoin as legal tender.\nRecent fluctuations in Bitcoin's price.\nRenewed interest from institutional investors. \nIs Bitcoin a good investment option?", 'answer': '\nYes, Bitcoin is a good investment option. The recent news of El Salvador adopting Bitcoin as legal tender has increased its demand and price, and institutional investors are showing renewed interest in the cryptocurrency. This makes it a good option for long-term investments, as it is likely to continue to increase in value over time.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x102f4fd80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+ 18%|███████████████▌                                                                         | 7/40 [01:59<07:04, 12.86s/it]2025/01/12 20:00:47 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm an entrepreneur with a background in the tech industry.\nI'm interested in diversifying my income streams. Gig economy continues to grow.\nReal estate crowdfunding gains popularity.\nStartups with innovative solutions attract venture capital funding. \nHow can I invest in startups?", 'answer': '\nInvesting in startups can be done through angel investing, venture capital funds, or crowdfunding platforms. Angel investing involves providing funding to early-stage startups in exchange for equity. Venture capital funds pool resources from multiple investors to invest in a diversified portfolio of startups. Crowdfunding platforms allow you to invest smaller amounts alongside other investors.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x102f4fd80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+ 20%|█████████████████▊                                                                       | 8/40 [02:02<05:15,  9.86s/it]2025/01/12 20:01:39 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a retiree looking for stable sources of income.\nI want to make the most of my retirement savings. Dividend-paying stocks gain attention for income investors.\nBonds offer fixed interest payments and lower risk.\nAnnuities provide guaranteed income for life. \nWhat are the best income-generating options for retirees?", 'answer': "\nFor retirees seeking income, dividend-paying stocks, bonds, and annuities are popular options. Dividend stocks provide regular dividend payments, while bonds offer fixed interest income. Annuities offer guaranteed income for life, providing financial security during retirement. It's essential to balance your portfolio to meet your income needs and risk tolerance."}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x102f4fd80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+ 22%|████████████████████                                                                     | 9/40 [02:57<10:12, 19.77s/it]
+2025/01/12 20:01:42 INFO dspy.teleprompt.mipro_optimizer_v2: Error generating few-shot examples: evaluate_faithfulness() takes 2 positional arguments but 3 were given
+2025/01/12 20:01:42 INFO dspy.teleprompt.mipro_optimizer_v2: Running without few-shot examples.
+2025/01/12 20:01:42 INFO dspy.teleprompt.mipro_optimizer_v2: 
+==> STEP 2: PROPOSE INSTRUCTION CANDIDATES <==
+2025/01/12 20:01:42 INFO dspy.teleprompt.mipro_optimizer_v2: We will use the few-shot examples from the previous step, a generated dataset summary, a summary of the program code, and a randomly selected prompting tip to propose instructions.
+2025/01/12 20:03:48 INFO dspy.teleprompt.mipro_optimizer_v2: 
+Proposing instructions...
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: Proposed Instructions for Predictor 0:
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 0: Given the fields `question`, produce the fields `answer`.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 1: Given a question, provide a step-by-step reasoning process that logically leads to the solution. Then, based on this reasoning, produce a clear and concise final answer. Ensure the reasoning is detailed and easy to follow, and the answer directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 2: Given a question, provide a detailed step-by-step reasoning process to arrive at the solution, followed by the final answer. Ensure the reasoning is structured and logical, and the answer is concise and directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 3: Given a question, provide a step-by-step reasoning process that logically leads to the solution. Then, based on this reasoning, produce a clear and concise final answer. Ensure the reasoning is detailed and easy to follow, and the answer directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 4: Given a question, provide a step-by-step reasoning process that leads to the solution, followed by the final answer. Ensure that the reasoning is structured and deliberate, starting with "Reasoning: Let's think step by step in order to," and the final answer is prefixed with "Answer:". Both fields should be clearly formatted and directly address the query.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 5: You are tasked with providing actionable and accurate financial advice in a high-stakes scenario. Given the input field `question`, which contains a financial query or problem, first generate a detailed and logical step-by-step explanation in the field `reasoning` to justify your approach. This reasoning should demonstrate a clear understanding of financial principles and practical application to the situation. Then, produce the final solution or recommendation in the field `answer`, ensuring it is concise, relevant, and actionable. Your response must be technically accurate and considerate of the potential impact on the user's financial decisions.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 6: Given a question, provide a step-by-step reasoning process that logically leads to the solution. Then, based on this reasoning, produce a clear and concise final answer. Ensure the reasoning is detailed and easy to follow, and the answer directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 7: Given a question, provide a step-by-step reasoning process that leads to the solution, followed by the final answer. Ensure that the reasoning is structured and deliberate, starting with "Reasoning: Let's think step by step in order to," and the final answer is prefixed with "Answer:". Both fields should be clearly formatted and directly address the query.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 8: Given a question, provide a step-by-step reasoning process that leads to the solution, followed by the final answer. Ensure that the reasoning is structured and deliberate, starting with "Reasoning: Let's think step by step in order to," and the final answer is prefixed with "Answer:". Both fields should be clearly formatted and directly address the query.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 9: Given a question, provide a step-by-step reasoning process that leads to the solution, followed by the final answer. Ensure that the reasoning is structured and deliberate, starting with "Reasoning: Let's think step by step in order to," and the final answer is prefixed with "Answer:". Both fields should be clearly formatted and directly address the query.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 10: Given a question, provide two outputs: (1) a detailed step-by-step reasoning process that logically explains how to arrive at the solution, and (2) the final answer to the question. Ensure that the reasoning is prefixed with "Reasoning: Let's think step by step in order to" and the final answer is prefixed with "Answer:". The reasoning should be clear, logical, and educational, while the answer should directly address the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 11: Given a question, provide a step-by-step reasoning process that logically leads to the solution. Then, based on this reasoning, produce a clear and concise final answer. Ensure the reasoning is detailed and easy to follow, and the answer directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 12: Given a question, provide two outputs: (1) a detailed step-by-step reasoning process that logically explains how to arrive at the solution, and (2) the final answer to the question. Ensure that the reasoning is prefixed with "Reasoning: Let's think step by step in order to" and the final answer is prefixed with "Answer:". The reasoning should be clear, logical, and educational, while the answer should directly address the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 13: Given a question, provide a detailed step-by-step reasoning process to arrive at the solution, followed by the final answer. Ensure the reasoning is structured and logical, and the answer is concise and directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 14: You are tasked with providing actionable and accurate financial advice in a high-stakes scenario. Given the input field `question`, which contains a financial query or problem, first generate a detailed and logical step-by-step explanation in the field `reasoning` to justify your approach. This reasoning should demonstrate a clear understanding of financial principles and practical application to the situation. Then, produce the final solution or recommendation in the field `answer`, ensuring it is concise, relevant, and actionable. Your response must be technically accurate and considerate of the potential impact on the user's financial decisions.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 15: Given a question, provide a step-by-step reasoning process that leads to the solution, followed by the final answer. Ensure that the reasoning is structured and deliberate, starting with "Reasoning: Let's think step by step in order to," and the final answer is prefixed with "Answer:". Both fields should be clearly formatted and directly address the query.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 16: Given a question, provide a detailed step-by-step reasoning process to arrive at the solution, followed by the final answer. Ensure the reasoning is structured and logical, and the answer is concise and directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 17: Given a question, provide a detailed step-by-step reasoning process to arrive at the solution, followed by the final answer. Ensure the reasoning is structured and logical, and the answer is concise and directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 18: Given a question, provide a step-by-step reasoning process that logically leads to the solution. Then, based on this reasoning, produce a clear and concise final answer. Ensure the reasoning is detailed and easy to follow, and the answer directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 19: Given a question, provide two outputs: (1) a detailed step-by-step reasoning process that logically explains how to arrive at the solution, and (2) the final answer to the question. Ensure that the reasoning is prefixed with "Reasoning: Let's think step by step in order to" and the final answer is prefixed with "Answer:". The reasoning should be clear, logical, and educational, while the answer should directly address the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 20: You are tasked with providing actionable and accurate financial advice in a high-stakes scenario. Given the input field `question`, which contains a financial query or problem, first generate a detailed and logical step-by-step explanation in the field `reasoning` to justify your approach. This reasoning should demonstrate a clear understanding of financial principles and practical application to the situation. Then, produce the final solution or recommendation in the field `answer`, ensuring it is concise, relevant, and actionable. Your response must be technically accurate and considerate of the potential impact on the user's financial decisions.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 21: Given a question, provide a detailed step-by-step reasoning process to arrive at the solution, followed by the final answer. Ensure the reasoning is structured and logical, and the answer is concise and directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 22: Given a question, provide a step-by-step reasoning process that logically leads to the solution. Then, based on this reasoning, produce a clear and concise final answer. Ensure the reasoning is detailed and easy to follow, and the answer directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 23: Given a question, provide a step-by-step reasoning process that leads to the solution, followed by the final answer. Ensure that the reasoning is structured and deliberate, starting with "Reasoning: Let's think step by step in order to," and the final answer is prefixed with "Answer:". Both fields should be clearly formatted and directly address the query.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 24: You are a financial advisor specializing in delivering personalized and actionable financial advice. Given the field `question`, which represents a financial query or scenario, provide two outputs: 
+
+1. `reasoning`: A step-by-step explanation or logical reasoning process that leads to the solution of the question. Begin with "Reasoning: Let's think step by step in order to" and ensure the explanation is clear, structured, and incorporates relevant financial principles or trends when applicable.
+
+2. `answer`: The final response or solution to the question. Start with "Answer:" and ensure it is concise, accurate, and practical.
+
+Make sure your outputs are technically sound, easy to understand, and tailored to the context of the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 25: You are tasked with providing actionable and accurate financial advice in a high-stakes scenario. Given the input field `question`, which contains a financial query or problem, first generate a detailed and logical step-by-step explanation in the field `reasoning` to justify your approach. This reasoning should demonstrate a clear understanding of financial principles and practical application to the situation. Then, produce the final solution or recommendation in the field `answer`, ensuring it is concise, relevant, and actionable. Your response must be technically accurate and considerate of the potential impact on the user's financial decisions.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 26: Given a question, provide a detailed step-by-step reasoning process to arrive at the solution, followed by the final answer. Ensure the reasoning is structured and logical, and the answer is concise and directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 27: You are a financial advisor specializing in delivering personalized and actionable financial advice. Given the field `question`, which represents a financial query or scenario, provide two outputs: 
+
+1. `reasoning`: A step-by-step explanation or logical reasoning process that leads to the solution of the question. Begin with "Reasoning: Let's think step by step in order to" and ensure the explanation is clear, structured, and incorporates relevant financial principles or trends when applicable.
+
+2. `answer`: The final response or solution to the question. Start with "Answer:" and ensure it is concise, accurate, and practical.
+
+Make sure your outputs are technically sound, easy to understand, and tailored to the context of the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 28: Given a question, provide a step-by-step reasoning process that leads to the solution, followed by the final answer. Ensure that the reasoning is structured and deliberate, starting with "Reasoning: Let's think step by step in order to," and the final answer is prefixed with "Answer:". Both fields should be clearly formatted and directly address the query.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 29: Given a question, provide a step-by-step reasoning process that leads to the solution, followed by the final answer. Ensure that the reasoning is structured and deliberate, starting with "Reasoning: Let's think step by step in order to," and the final answer is prefixed with "Answer:". Both fields should be clearly formatted and directly address the query.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 30: Given a question, provide two outputs: (1) a detailed step-by-step reasoning process that logically explains how to arrive at the solution, and (2) the final answer to the question. Ensure that the reasoning is prefixed with "Reasoning: Let's think step by step in order to" and the final answer is prefixed with "Answer:". The reasoning should be clear, logical, and educational, while the answer should directly address the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 31: Given a question, provide two outputs: (1) a detailed step-by-step reasoning process that logically explains how to arrive at the solution, and (2) the final answer to the question. Ensure that the reasoning is prefixed with "Reasoning: Let's think step by step in order to" and the final answer is prefixed with "Answer:". The reasoning should be clear, logical, and educational, while the answer should directly address the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 32: Given a question, provide a step-by-step reasoning process that logically leads to the solution. Then, based on this reasoning, produce a clear and concise final answer. Ensure the reasoning is detailed and easy to follow, and the answer directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 33: You are a financial advisor specializing in delivering personalized and actionable financial advice. Given the field `question`, which represents a financial query or scenario, provide two outputs: 
+
+1. `reasoning`: A step-by-step explanation or logical reasoning process that leads to the solution of the question. Begin with "Reasoning: Let's think step by step in order to" and ensure the explanation is clear, structured, and incorporates relevant financial principles or trends when applicable.
+
+2. `answer`: The final response or solution to the question. Start with "Answer:" and ensure it is concise, accurate, and practical.
+
+Make sure your outputs are technically sound, easy to understand, and tailored to the context of the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 34: You are tasked with providing actionable and accurate financial advice in a high-stakes scenario. Given the input field `question`, which contains a financial query or problem, first generate a detailed and logical step-by-step explanation in the field `reasoning` to justify your approach. This reasoning should demonstrate a clear understanding of financial principles and practical application to the situation. Then, produce the final solution or recommendation in the field `answer`, ensuring it is concise, relevant, and actionable. Your response must be technically accurate and considerate of the potential impact on the user's financial decisions.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 35: Given a question, provide two outputs: (1) a detailed step-by-step reasoning process that logically explains how to arrive at the solution, and (2) the final answer to the question. Ensure that the reasoning is prefixed with "Reasoning: Let's think step by step in order to" and the final answer is prefixed with "Answer:". The reasoning should be clear, logical, and educational, while the answer should directly address the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 36: You are tasked with providing actionable and accurate financial advice in a high-stakes scenario. Given the input field `question`, which contains a financial query or problem, first generate a detailed and logical step-by-step explanation in the field `reasoning` to justify your approach. This reasoning should demonstrate a clear understanding of financial principles and practical application to the situation. Then, produce the final solution or recommendation in the field `answer`, ensuring it is concise, relevant, and actionable. Your response must be technically accurate and considerate of the potential impact on the user's financial decisions.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 37: Given a question, provide a step-by-step reasoning process that logically leads to the solution. Then, based on this reasoning, produce a clear and concise final answer. Ensure the reasoning is detailed and easy to follow, and the answer directly addresses the question.
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: 
+
+2025/01/12 20:05:48 INFO dspy.teleprompt.mipro_optimizer_v2: Evaluating the default program...
+
+Average Metric: 109.41 / 160 (68.4%): 100%|████████████████████████████████████████████████| 160/160 [00:02<00:00, 54.78it/s]
+2025/01/12 20:05:51 INFO dspy.evaluate.evaluate: Average Metric: 109.4099206349206 / 160 (68.4%)
+2025/01/12 20:05:51 INFO dspy.teleprompt.mipro_optimizer_v2: Default program score: 68.38
+
+2025/01/12 20:05:51 INFO dspy.teleprompt.mipro_optimizer_v2: ==> STEP 3: FINDING OPTIMAL PROMPT PARAMETERS <==
+2025/01/12 20:05:51 INFO dspy.teleprompt.mipro_optimizer_v2: We will evaluate the program over a series of trials with different combinations of instructions and few-shot examples to find the optimal combination using Bayesian Optimization.
+
+/Users/nivvaknin/Library/Caches/pypoetry/virtualenvs/dspy-prompt-optimization-ttF9o-b8-py3.11/lib/python3.11/site-packages/optuna/_experimental.py:31: ExperimentalWarning: Argument ``multivariate`` is an experimental feature. The interface can change in the future.
+  warnings.warn(
+2025/01/12 20:05:51 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 1 / 50 ==
+Average Metric: 19.18 / 25 (76.7%): 100%|████████████████████████████████████████████████████| 25/25 [08:11<00:00, 19.65s/it]
+2025/01/12 20:14:02 INFO dspy.evaluate.evaluate: Average Metric: 19.180952380952384 / 25 (76.7%)
+2025/01/12 20:14:02 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 76.72 on minibatch of size 25 with parameters ['Predictor 0: Instruction 26'].
+2025/01/12 20:14:02 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72]
+2025/01/12 20:14:02 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38]
+2025/01/12 20:14:02 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.38
+2025/01/12 20:14:02 INFO dspy.teleprompt.mipro_optimizer_v2: ============================
+
+
+2025/01/12 20:14:02 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 2 / 50 ==
+Average Metric: 18.91 / 25 (75.6%): 100%|████████████████████████████████████████████████████| 25/25 [09:07<00:00, 21.89s/it]
+2025/01/12 20:23:10 INFO dspy.evaluate.evaluate: Average Metric: 18.908333333333328 / 25 (75.6%)
+2025/01/12 20:23:10 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 75.63 on minibatch of size 25 with parameters ['Predictor 0: Instruction 10'].
+2025/01/12 20:23:10 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63]
+2025/01/12 20:23:10 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38]
+2025/01/12 20:23:10 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.38
+2025/01/12 20:23:10 INFO dspy.teleprompt.mipro_optimizer_v2: ============================
+
+
+2025/01/12 20:23:10 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 3 / 50 ==
+Average Metric: 18.63 / 25 (74.5%): 100%|████████████████████████████████████████████████████| 25/25 [09:11<00:00, 22.05s/it]
+2025/01/12 20:32:21 INFO dspy.evaluate.evaluate: Average Metric: 18.62857142857143 / 25 (74.5%)
+2025/01/12 20:32:21 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 74.51 on minibatch of size 25 with parameters ['Predictor 0: Instruction 7'].
+2025/01/12 20:32:21 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51]
+2025/01/12 20:32:21 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38]
+2025/01/12 20:32:21 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.38
+2025/01/12 20:32:21 INFO dspy.teleprompt.mipro_optimizer_v2: ============================
+
+
+2025/01/12 20:32:21 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 4 / 50 ==
+Average Metric: 19.47 / 25 (77.9%): 100%|████████████████████████████████████████████████████| 25/25 [08:07<00:00, 19.49s/it]
+2025/01/12 20:40:28 INFO dspy.evaluate.evaluate: Average Metric: 19.473809523809525 / 25 (77.9%)
+2025/01/12 20:40:28 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 77.9 on minibatch of size 25 with parameters ['Predictor 0: Instruction 15'].
+2025/01/12 20:40:28 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9]
+2025/01/12 20:40:28 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38]
+2025/01/12 20:40:28 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.38
+2025/01/12 20:40:28 INFO dspy.teleprompt.mipro_optimizer_v2: ============================
+
+
+2025/01/12 20:40:28 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 5 / 50 ==
+Average Metric: 20.24 / 25 (81.0%): 100%|████████████████████████████████████████████████████| 25/25 [07:09<00:00, 17.17s/it]
+2025/01/12 20:47:38 INFO dspy.evaluate.evaluate: Average Metric: 20.241666666666664 / 25 (81.0%)
+2025/01/12 20:47:38 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 80.97 on minibatch of size 25 with parameters ['Predictor 0: Instruction 8'].
+2025/01/12 20:47:38 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97]
+2025/01/12 20:47:38 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38]
+2025/01/12 20:47:38 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.38
+2025/01/12 20:47:38 INFO dspy.teleprompt.mipro_optimizer_v2: ============================
+
+
+2025/01/12 20:47:38 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 6 / 50 ==
+Average Metric: 8.02 / 11 (72.9%):  44%|███████████████████████▎                             | 11/25 [04:13<04:57, 21.22s/it]2025/01/12 20:52:39 ERROR dspy.utils.parallelizer: Error processing item Example({'question': 'I am a 40 year old entrepreneur with a focus on sustainable business practices.\nI am looking to invest in renewable energy projects. Renewable energy sector is rapidly growing with advancements in solar and wind technologies.\nGovernment incentives and policies are increasingly supporting green energy initiatives.\nInvestors are showing heightened interest in sustainable and eco-friendly projects. \nWhat are the best investment opportunities in renewable energy?', 'answer': "\nInvesting in renewable energy projects is a promising opportunity given the sector's rapid growth and government support. Consider investing in solar and wind energy companies, as they are at the forefront of technological advancements. Additionally, look into green energy ETFs, which offer diversified exposure to the sector. Participating in community solar projects or investing in companies focused on energy storage solutions can also provide substantial returns. With the increasing global emphasis on sustainability, renewable energy investments are likely to yield long-term benefits."}) (input_keys={'question'}): litellm.RateLimitError: AzureException RateLimitError - Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-08-01-preview have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 1 second. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}. Set `provide_traceback=True` to see the stack trace.
+Average Metric: 16.84 / 24 (70.2%): 100%|████████████████████████████████████████████████████| 25/25 [09:18<00:00, 22.33s/it]
+2025/01/12 20:56:56 INFO dspy.evaluate.evaluate: Average Metric: 16.84325396825397 / 25 (67.4%)
+2025/01/12 20:56:56 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 67.37 on minibatch of size 25 with parameters ['Predictor 0: Instruction 20'].
+2025/01/12 20:56:56 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37]
+2025/01/12 20:56:56 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38]
+2025/01/12 20:56:56 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.38
+2025/01/12 20:56:56 INFO dspy.teleprompt.mipro_optimizer_v2: ============================
+
+
+2025/01/12 20:56:56 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 7 / 50 ==
+Average Metric: 12.73 / 17 (74.9%):  68%|███████████████████████████████████▎                | 17/25 [03:12<01:43, 12.97s/it]2025/01/12 21:00:59 ERROR dspy.utils.parallelizer: Error processing item Example({'question': "I'm a 45 year old teacher.\nI'm interested in saving for retirement and prefer low-risk investments. The stock market shows signs of volatility amid geopolitical tensions. \nWhat are your thoughts on investing in bonds for retirement savings?", 'answer': "\nInvesting in bonds can be a wise choice for retirement savings, especially if you prefer low-risk investments. Bonds are generally considered safer than stocks because they provide fixed interest payments and return the principal at maturity. They can offer stability to your portfolio, particularly during times of market volatility. However, it's important to diversify your investments to balance risk and return. Consider a mix of government and corporate bonds, and adjust your bond allocation as you approach retirement to ensure it aligns with your financial goals."}) (input_keys={'question'}): litellm.RateLimitError: AzureException RateLimitError - Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-08-01-preview have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 8 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}. Set `provide_traceback=True` to see the stack trace.
+Average Metric: 18.20 / 24 (75.8%): 100%|████████████████████████████████████████████████████| 25/25 [05:07<00:00, 12.30s/it]
+2025/01/12 21:02:03 INFO dspy.evaluate.evaluate: Average Metric: 18.196428571428573 / 25 (72.8%)
+2025/01/12 21:02:03 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 72.79 on minibatch of size 25 with parameters ['Predictor 0: Instruction 7'].
+2025/01/12 21:02:03 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79]
+2025/01/12 21:02:03 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38]
+2025/01/12 21:02:03 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.38
+2025/01/12 21:02:03 INFO dspy.teleprompt.mipro_optimizer_v2: ============================
+
+
+2025/01/12 21:02:03 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 8 / 50 ==
+Average Metric: 17.78 / 25 (71.1%): 100%|████████████████████████████████████████████████████| 25/25 [08:17<00:00, 19.88s/it]
+2025/01/12 21:10:20 INFO dspy.evaluate.evaluate: Average Metric: 17.780952380952375 / 25 (71.1%)
+2025/01/12 21:10:20 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 71.12 on minibatch of size 25 with parameters ['Predictor 0: Instruction 11'].
+2025/01/12 21:10:20 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12]
+2025/01/12 21:10:20 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38]
+2025/01/12 21:10:20 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.38
+2025/01/12 21:10:20 INFO dspy.teleprompt.mipro_optimizer_v2: ============================
+
+
+2025/01/12 21:10:20 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 9 / 50 ==
+Average Metric: 16.70 / 25 (66.8%): 100%|████████████████████████████████████████████████████| 25/25 [07:10<00:00, 17.22s/it]
+2025/01/12 21:17:31 INFO dspy.evaluate.evaluate: Average Metric: 16.698809523809523 / 25 (66.8%)
+2025/01/12 21:17:31 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 66.8 on minibatch of size 25 with parameters ['Predictor 0: Instruction 5'].
+2025/01/12 21:17:31 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8]
+2025/01/12 21:17:31 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38]
+2025/01/12 21:17:31 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.38
+2025/01/12 21:17:31 INFO dspy.teleprompt.mipro_optimizer_v2: ============================
+
+
+2025/01/12 21:17:31 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 10 / 50 ==
+Average Metric: 16.27 / 25 (65.1%): 100%|████████████████████████████████████████████████████| 25/25 [06:08<00:00, 14.74s/it]
+2025/01/12 21:23:40 INFO dspy.evaluate.evaluate: Average Metric: 16.267857142857142 / 25 (65.1%)
+2025/01/12 21:23:40 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 65.07 on minibatch of size 25 with parameters ['Predictor 0: Instruction 20'].
+2025/01/12 21:23:40 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07]
+2025/01/12 21:23:40 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38]
+2025/01/12 21:23:40 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.38
+2025/01/12 21:23:40 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 21:23:40 INFO dspy.teleprompt.mipro_optimizer_v2: ===== Full Eval 1 =====
+2025/01/12 21:23:40 INFO dspy.teleprompt.mipro_optimizer_v2: Doing full eval on next top averaging program (Avg Score: 80.97) from minibatch trials...
+Average Metric: 52.00 / 69 (75.4%):  43%|█████████████████████▉                             | 69/160 [08:17<20:33, 13.55s/it]2025/01/12 21:32:48 ERROR dspy.utils.parallelizer: Error processing item Example({'question': "I recently inherited a sum of money and want to invest it wisely.\nI'm open to moderate risk for potential gains. The housing market shows signs of cooling down after a period of rapid growth. \nDo you think real estate is a good investment option?", 'answer': '\nReal estate can be a good investment option, depending on the market conditions. In the current market, it may be wise to wait for the market to cool down before investing in real estate. This will help you avoid overpaying for a property and ensure that you get the best return on your investment.'}) (input_keys={'question'}): litellm.RateLimitError: AzureException RateLimitError - Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-08-01-preview have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 6 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}. Set `provide_traceback=True` to see the stack trace.
+Average Metric: 72.48 / 95 (76.3%):  60%|██████████████████████████████▌                    | 96/160 [13:13<15:26, 14.47s/it]2025/01/12 21:37:02 ERROR dspy.utils.parallelizer: Error processing item Example({'question': "I'm a 45 year old teacher.\nI'm interested in saving for retirement and prefer low-risk investments. The stock market shows signs of volatility amid geopolitical tensions. \nWhat are your thoughts on investing in bonds for retirement savings?", 'answer': "\nInvesting in bonds can be a wise choice for retirement savings, especially if you prefer low-risk investments. Bonds are generally considered safer than stocks because they provide fixed interest payments and return the principal at maturity. They can offer stability to your portfolio, particularly during times of market volatility. However, it's important to diversify your investments to balance risk and return. Consider a mix of government and corporate bonds, and adjust your bond allocation as you approach retirement to ensure it aligns with your financial goals."}) (input_keys={'question'}): litellm.RateLimitError: AzureException RateLimitError - Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-08-01-preview have exceeded call rate limit of your current OpenAI S0 pricing tier. Please retry after 1 second. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}. Set `provide_traceback=True` to see the stack trace.
+Average Metric: 119.08 / 158 (75.4%): 100%|████████████████████████████████████████████████| 160/160 [23:40<00:00,  8.88s/it]
+2025/01/12 21:47:20 INFO dspy.evaluate.evaluate: Average Metric: 119.0809523809524 / 160 (74.4%)
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: New best full eval score! Score: 74.43
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: =======================
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: 
+
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 11 / 50 ==
+Average Metric: 19.51 / 25 (78.0%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 1968.20it/s]
+2025/01/12 21:47:20 INFO dspy.evaluate.evaluate: Average Metric: 19.505952380952383 / 25 (78.0%)
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 78.02 on minibatch of size 25 with parameters ['Predictor 0: Instruction 8'].
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02]
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 21:47:20 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 12 / 50 ==
+Average Metric: 18.31 / 25 (73.2%): 100%|████████████████████████████████████████████████████| 25/25 [00:02<00:00,  8.35it/s]
+2025/01/12 21:47:23 INFO dspy.evaluate.evaluate: Average Metric: 18.309523809523807 / 25 (73.2%)
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 73.24 on minibatch of size 25 with parameters ['Predictor 0: Instruction 8'].
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24]
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 13 / 50 ==
+Average Metric: 18.60 / 25 (74.4%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 2269.06it/s]
+2025/01/12 21:47:23 INFO dspy.evaluate.evaluate: Average Metric: 18.601190476190474 / 25 (74.4%)
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 74.4 on minibatch of size 25 with parameters ['Predictor 0: Instruction 8'].
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4]
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 21:47:23 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 14 / 50 ==
+Average Metric: 19.73 / 25 (78.9%): 100%|████████████████████████████████████████████████████| 25/25 [07:55<00:00, 19.02s/it]
+2025/01/12 21:55:19 INFO dspy.evaluate.evaluate: Average Metric: 19.726190476190474 / 25 (78.9%)
+2025/01/12 21:55:19 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 78.9 on minibatch of size 25 with parameters ['Predictor 0: Instruction 1'].
+2025/01/12 21:55:19 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9]
+2025/01/12 21:55:19 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 21:55:19 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 21:55:19 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 21:55:19 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 15 / 50 ==
+Average Metric: 18.71 / 25 (74.8%): 100%|████████████████████████████████████████████████████| 25/25 [06:15<00:00, 15.02s/it]
+2025/01/12 22:01:34 INFO dspy.evaluate.evaluate: Average Metric: 18.705952380952382 / 25 (74.8%)
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 74.82 on minibatch of size 25 with parameters ['Predictor 0: Instruction 1'].
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82]
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 16 / 50 ==
+Average Metric: 20.78 / 25 (83.1%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 3093.60it/s]
+2025/01/12 22:01:34 INFO dspy.evaluate.evaluate: Average Metric: 20.782142857142855 / 25 (83.1%)
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 83.13 on minibatch of size 25 with parameters ['Predictor 0: Instruction 28'].
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13]
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 17 / 50 ==
+Average Metric: 19.38 / 25 (77.5%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 4451.42it/s]
+2025/01/12 22:01:34 INFO dspy.evaluate.evaluate: Average Metric: 19.376190476190477 / 25 (77.5%)
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 77.5 on minibatch of size 25 with parameters ['Predictor 0: Instruction 28'].
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5]
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 18 / 50 ==
+Average Metric: 19.12 / 25 (76.5%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 1879.94it/s]
+2025/01/12 22:01:34 INFO dspy.evaluate.evaluate: Average Metric: 19.116666666666667 / 25 (76.5%)
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 76.47 on minibatch of size 25 with parameters ['Predictor 0: Instruction 9'].
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47]
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:01:34 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 19 / 50 ==
+Average Metric: 18.63 / 25 (74.5%): 100%|████████████████████████████████████████████████████| 25/25 [08:08<00:00, 19.56s/it]
+2025/01/12 22:09:43 INFO dspy.evaluate.evaluate: Average Metric: 18.628571428571423 / 25 (74.5%)
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 74.51 on minibatch of size 25 with parameters ['Predictor 0: Instruction 35'].
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51]
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 20 / 50 ==
+Average Metric: 19.44 / 25 (77.8%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 1694.89it/s]
+2025/01/12 22:09:43 INFO dspy.evaluate.evaluate: Average Metric: 19.44404761904762 / 25 (77.8%)
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 77.78 on minibatch of size 25 with parameters ['Predictor 0: Instruction 28'].
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78]
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43]
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 74.43
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: ===== Full Eval 2 =====
+2025/01/12 22:09:43 INFO dspy.teleprompt.mipro_optimizer_v2: Doing full eval on next top averaging program (Avg Score: 79.47) from minibatch trials...
+Average Metric: 120.30 / 160 (75.2%): 100%|██████████████████████████████████████████████| 160/160 [00:00<00:00, 1042.58it/s]
+2025/01/12 22:09:44 INFO dspy.evaluate.evaluate: Average Metric: 120.2952380952381 / 160 (75.2%)
+2025/01/12 22:09:44 INFO dspy.teleprompt.mipro_optimizer_v2: New best full eval score! Score: 75.18
+2025/01/12 22:09:44 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:09:44 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:09:44 INFO dspy.teleprompt.mipro_optimizer_v2: =======================
+2025/01/12 22:09:44 INFO dspy.teleprompt.mipro_optimizer_v2: 
+
+2025/01/12 22:09:44 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 21 / 50 ==
+Average Metric: 19.27 / 25 (77.1%): 100%|████████████████████████████████████████████████████| 25/25 [09:11<00:00, 22.07s/it]
+2025/01/12 22:18:55 INFO dspy.evaluate.evaluate: Average Metric: 19.27261904761905 / 25 (77.1%)
+2025/01/12 22:18:55 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 77.09 on minibatch of size 25 with parameters ['Predictor 0: Instruction 27'].
+2025/01/12 22:18:55 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09]
+2025/01/12 22:18:55 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:18:55 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:18:55 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:18:55 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 22 / 50 ==
+Average Metric: 18.41 / 25 (73.6%): 100%|████████████████████████████████████████████████████| 25/25 [03:13<00:00,  7.74s/it]
+2025/01/12 22:22:09 INFO dspy.evaluate.evaluate: Average Metric: 18.40714285714286 / 25 (73.6%)
+2025/01/12 22:22:09 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 73.63 on minibatch of size 25 with parameters ['Predictor 0: Instruction 1'].
+2025/01/12 22:22:09 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63]
+2025/01/12 22:22:09 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:22:09 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:22:09 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:22:09 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 23 / 50 ==
+Average Metric: 14.85 / 20 (74.2%):  80%|█████████████████████████████████████████▌          | 20/25 [03:03<00:45,  9.03s/it]2025/01/12 22:25:20 ERROR dspy.utils.parallelizer: Error processing item Example({'question': 'I am a 35 year old software engineer with a stable income.\nI am interested in diversifying my investment portfolio. The rise of technology stocks in recent years.\nPotential risks associated with tech investments due to market volatility.\nThe importance of diversification to mitigate risks. \nShould I consider investing in technology stocks?', 'answer': "\nInvesting in technology stocks can be a good option, especially given their rise in recent years. However, it's important to be aware of the potential risks associated with market volatility. To mitigate these risks, consider diversifying your investment portfolio across different sectors. This will help balance potential losses in one area with gains in another, providing a more stable investment strategy. Always assess your risk tolerance and financial goals before making investment decisions."}) (input_keys={'question'}): litellm.RateLimitError: AzureException RateLimitError - Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-08-01-preview have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 49 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}. Set `provide_traceback=True` to see the stack trace.
+Average Metric: 18.32 / 24 (76.3%): 100%|████████████████████████████████████████████████████| 25/25 [04:05<00:00,  9.82s/it]
+2025/01/12 22:26:14 INFO dspy.evaluate.evaluate: Average Metric: 18.316666666666666 / 25 (73.3%)
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 73.27 on minibatch of size 25 with parameters ['Predictor 0: Instruction 37'].
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27]
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 24 / 50 ==
+Average Metric: 18.26 / 25 (73.0%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 2351.54it/s]
+2025/01/12 22:26:14 INFO dspy.evaluate.evaluate: Average Metric: 18.257142857142856 / 25 (73.0%)
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 73.03 on minibatch of size 25 with parameters ['Predictor 0: Instruction 0'].
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03]
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:26:14 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 25 / 50 ==
+Average Metric: 16.51 / 25 (66.1%): 100%|████████████████████████████████████████████████████| 25/25 [04:20<00:00, 10.43s/it]
+2025/01/12 22:30:35 INFO dspy.evaluate.evaluate: Average Metric: 16.513492063492063 / 25 (66.1%)
+2025/01/12 22:30:35 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 66.05 on minibatch of size 25 with parameters ['Predictor 0: Instruction 14'].
+2025/01/12 22:30:35 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05]
+2025/01/12 22:30:35 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:30:35 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:30:35 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:30:35 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 26 / 50 ==
+Average Metric: 17.98 / 25 (71.9%): 100%|████████████████████████████████████████████████████| 25/25 [02:01<00:00,  4.85s/it]
+2025/01/12 22:32:36 INFO dspy.evaluate.evaluate: Average Metric: 17.975 / 25 (71.9%)
+2025/01/12 22:32:36 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 71.9 on minibatch of size 25 with parameters ['Predictor 0: Instruction 6'].
+2025/01/12 22:32:36 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9]
+2025/01/12 22:32:36 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:32:36 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:32:36 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:32:36 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 27 / 50 ==
+Average Metric: 4.91 / 7 (70.1%):  28%|███████████████▍                                       | 7/25 [02:03<05:08, 17.15s/it]2025/01/12 22:34:47 ERROR dspy.utils.parallelizer: Error processing item Example({'question': "I am a 55 year old business owner.\nI'm considering investing a portion of my profits in the commodities market. Global oil demand rebounds as travel restrictions ease.\nOPEC+ countries agree to increase oil production in response to rising prices.\nEnvironmental concerns lead to increased exploration of alternative energy sources. \nWhat's your opinion on the current oil market situation?", 'answer': '\nGiven the current situation, I would recommend investing in oil futures. The OPEC+ countries have agreed to increase production, which should help to stabilize prices. Additionally, the rebound in global oil demand is a positive sign for the market. However, it is important to keep an eye on the environmental concerns, as this could lead to a shift away from oil in the long-term.'}) (input_keys={'question'}): litellm.RateLimitError: AzureException RateLimitError - Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-08-01-preview have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 50 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}. Set `provide_traceback=True` to see the stack trace.
+Average Metric: 17.41 / 24 (72.5%): 100%|████████████████████████████████████████████████████| 25/25 [06:22<00:00, 15.30s/it]
+2025/01/12 22:38:59 INFO dspy.evaluate.evaluate: Average Metric: 17.40555555555555 / 25 (69.6%)
+2025/01/12 22:38:59 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 69.62 on minibatch of size 25 with parameters ['Predictor 0: Instruction 13'].
+2025/01/12 22:38:59 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62]
+2025/01/12 22:38:59 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:38:59 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:38:59 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:38:59 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 28 / 50 ==
+Average Metric: 18.16 / 25 (72.7%): 100%|████████████████████████████████████████████████████| 25/25 [05:03<00:00, 12.13s/it]
+2025/01/12 22:44:02 INFO dspy.evaluate.evaluate: Average Metric: 18.163888888888888 / 25 (72.7%)
+2025/01/12 22:44:02 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 72.66 on minibatch of size 25 with parameters ['Predictor 0: Instruction 2'].
+2025/01/12 22:44:02 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66]
+2025/01/12 22:44:02 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:44:02 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:44:02 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:44:02 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 29 / 50 ==
+Average Metric: 18.22 / 25 (72.9%): 100%|████████████████████████████████████████████████████| 25/25 [06:08<00:00, 14.75s/it]
+2025/01/12 22:50:11 INFO dspy.evaluate.evaluate: Average Metric: 18.222619047619048 / 25 (72.9%)
+2025/01/12 22:50:11 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 72.89 on minibatch of size 25 with parameters ['Predictor 0: Instruction 12'].
+2025/01/12 22:50:11 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89]
+2025/01/12 22:50:11 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:50:11 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:50:11 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:50:11 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 30 / 50 ==
+Average Metric: 18.01 / 25 (72.0%): 100%|████████████████████████████████████████████████████| 25/25 [05:04<00:00, 12.16s/it]
+2025/01/12 22:55:15 INFO dspy.evaluate.evaluate: Average Metric: 18.010714285714286 / 25 (72.0%)
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 72.04 on minibatch of size 25 with parameters ['Predictor 0: Instruction 21'].
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04]
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18]
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: ===== Full Eval 3 =====
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: Doing full eval on next top averaging program (Avg Score: 77.9) from minibatch trials...
+Average Metric: 120.30 / 160 (75.2%): 100%|███████████████████████████████████████████████| 160/160 [00:00<00:00, 990.09it/s]
+2025/01/12 22:55:15 INFO dspy.evaluate.evaluate: Average Metric: 120.2952380952381 / 160 (75.2%)
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: =======================
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: 
+
+2025/01/12 22:55:15 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 31 / 50 ==
+Average Metric: 17.95 / 25 (71.8%): 100%|████████████████████████████████████████████████████| 25/25 [04:16<00:00, 10.26s/it]
+2025/01/12 22:59:32 INFO dspy.evaluate.evaluate: Average Metric: 17.953571428571426 / 25 (71.8%)
+2025/01/12 22:59:32 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 71.81 on minibatch of size 25 with parameters ['Predictor 0: Instruction 32'].
+2025/01/12 22:59:32 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81]
+2025/01/12 22:59:32 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 22:59:32 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 22:59:32 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 22:59:32 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 32 / 50 ==
+Average Metric: 16.86 / 25 (67.4%): 100%|████████████████████████████████████████████████████| 25/25 [03:05<00:00,  7.43s/it]
+2025/01/12 23:02:37 INFO dspy.evaluate.evaluate: Average Metric: 16.855952380952377 / 25 (67.4%)
+2025/01/12 23:02:37 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 67.42 on minibatch of size 25 with parameters ['Predictor 0: Instruction 34'].
+2025/01/12 23:02:37 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42]
+2025/01/12 23:02:37 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 23:02:37 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 23:02:37 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 23:02:37 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 33 / 50 ==
+Average Metric: 17.90 / 25 (71.6%): 100%|████████████████████████████████████████████████████| 25/25 [05:09<00:00, 12.39s/it]
+2025/01/12 23:07:47 INFO dspy.evaluate.evaluate: Average Metric: 17.90119047619048 / 25 (71.6%)
+2025/01/12 23:07:47 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 71.6 on minibatch of size 25 with parameters ['Predictor 0: Instruction 31'].
+2025/01/12 23:07:47 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6]
+2025/01/12 23:07:47 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 23:07:47 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 23:07:47 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 23:07:47 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 34 / 50 ==
+Average Metric: 17.89 / 25 (71.6%): 100%|████████████████████████████████████████████████████| 25/25 [04:17<00:00, 10.31s/it]
+2025/01/12 23:12:05 INFO dspy.evaluate.evaluate: Average Metric: 17.891666666666666 / 25 (71.6%)
+2025/01/12 23:12:05 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 71.57 on minibatch of size 25 with parameters ['Predictor 0: Instruction 16'].
+2025/01/12 23:12:05 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57]
+2025/01/12 23:12:05 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 23:12:05 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 23:12:05 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 23:12:05 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 35 / 50 ==
+Average Metric: 18.61 / 25 (74.4%): 100%|████████████████████████████████████████████████████| 25/25 [08:01<00:00, 19.26s/it]
+2025/01/12 23:20:06 INFO dspy.evaluate.evaluate: Average Metric: 18.61190476190476 / 25 (74.4%)
+2025/01/12 23:20:06 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 74.45 on minibatch of size 25 with parameters ['Predictor 0: Instruction 24'].
+2025/01/12 23:20:06 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45]
+2025/01/12 23:20:06 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 23:20:06 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 23:20:06 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 23:20:06 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 36 / 50 ==
+Average Metric: 18.68 / 25 (74.7%): 100%|████████████████████████████████████████████████████| 25/25 [04:06<00:00,  9.85s/it]
+2025/01/12 23:24:13 INFO dspy.evaluate.evaluate: Average Metric: 18.682142857142857 / 25 (74.7%)
+2025/01/12 23:24:13 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 74.73 on minibatch of size 25 with parameters ['Predictor 0: Instruction 30'].
+2025/01/12 23:24:13 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73]
+2025/01/12 23:24:13 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 23:24:13 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 23:24:13 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 23:24:13 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 37 / 50 ==
+Average Metric: 17.73 / 25 (70.9%): 100%|████████████████████████████████████████████████████| 25/25 [05:09<00:00, 12.39s/it]
+2025/01/12 23:29:22 INFO dspy.evaluate.evaluate: Average Metric: 17.726190476190478 / 25 (70.9%)
+2025/01/12 23:29:22 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 70.9 on minibatch of size 25 with parameters ['Predictor 0: Instruction 33'].
+2025/01/12 23:29:22 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9]
+2025/01/12 23:29:22 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 23:29:22 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 23:29:22 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 23:29:22 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 38 / 50 ==
+Average Metric: 15.68 / 25 (62.7%): 100%|████████████████████████████████████████████████████| 25/25 [01:59<00:00,  4.77s/it]
+2025/01/12 23:31:22 INFO dspy.evaluate.evaluate: Average Metric: 15.684523809523807 / 25 (62.7%)
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 62.74 on minibatch of size 25 with parameters ['Predictor 0: Instruction 3'].
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74]
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 39 / 50 ==
+Average Metric: 18.90 / 25 (75.6%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 5059.72it/s]
+2025/01/12 23:31:22 INFO dspy.evaluate.evaluate: Average Metric: 18.904761904761905 / 25 (75.6%)
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 75.62 on minibatch of size 25 with parameters ['Predictor 0: Instruction 4'].
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62]
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 23:31:22 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 40 / 50 ==
+Average Metric: 17.11 / 25 (68.4%): 100%|████████████████████████████████████████████████████| 25/25 [05:11<00:00, 12.45s/it]
+2025/01/12 23:36:33 INFO dspy.evaluate.evaluate: Average Metric: 17.10753968253968 / 25 (68.4%)
+2025/01/12 23:36:33 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 68.43 on minibatch of size 25 with parameters ['Predictor 0: Instruction 25'].
+2025/01/12 23:36:33 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43]
+2025/01/12 23:36:33 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18]
+2025/01/12 23:36:33 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/12 23:36:33 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/12 23:36:33 INFO dspy.teleprompt.mipro_optimizer_v2: ===== Full Eval 4 =====
+2025/01/12 23:36:33 INFO dspy.teleprompt.mipro_optimizer_v2: Doing full eval on next top averaging program (Avg Score: 77.09) from minibatch trials...
+Average Metric: 28.83 / 39 (73.9%):  24%|████████████                                       | 38/160 [06:09<30:13, 14.86s/it]2025/01/12 23:43:30 ERROR dspy.utils.parallelizer: Error processing item Example({'question': 'I am a 25 year old software engineer with a stable income.\nI want to start investing in stocks for long-term growth. Tech stocks have shown strong growth in recent years.\nMarket volatility due to global economic conditions.\nImportance of diversifying across different sectors for risk management. \nWhere should I begin?', 'answer': '\nStart by investing in a diversified portfolio of stocks across different sectors. Focus on tech stocks, as they have shown strong growth in recent years, but also consider investing in other sectors such as healthcare, energy, and consumer goods. Additionally, consider investing in index funds to spread out your risk and reduce volatility. Finally, consider investing in cryptocurrencies as well, as they can provide an additional layer of diversification and potential for growth.'}) (input_keys={'question'}): litellm.RateLimitError: AzureException RateLimitError - Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-08-01-preview have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 60 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}. Set `provide_traceback=True` to see the stack trace.
+Average Metric: 115.81 / 159 (72.8%): 100%|████████████████████████████████████████████████| 160/160 [35:23<00:00, 13.27s/it]
+2025/01/13 00:11:56 INFO dspy.evaluate.evaluate: Average Metric: 115.81111111111106 / 160 (72.4%)
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: =======================
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: 
+
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 41 / 50 ==
+Average Metric: 16.84 / 25 (67.4%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 3861.59it/s]
+2025/01/13 00:11:56 INFO dspy.evaluate.evaluate: Average Metric: 16.83809523809524 / 25 (67.4%)
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 67.35 on minibatch of size 25 with parameters ['Predictor 0: Instruction 29'].
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43, 67.35]
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 42 / 50 ==
+Average Metric: 17.85 / 25 (71.4%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 2896.54it/s]
+2025/01/13 00:11:56 INFO dspy.evaluate.evaluate: Average Metric: 17.85238095238095 / 25 (71.4%)
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 71.41 on minibatch of size 25 with parameters ['Predictor 0: Instruction 8'].
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43, 67.35, 71.41]
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 43 / 50 ==
+Average Metric: 19.30 / 25 (77.2%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 2700.64it/s]
+2025/01/13 00:11:56 INFO dspy.evaluate.evaluate: Average Metric: 19.295238095238094 / 25 (77.2%)
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 77.18 on minibatch of size 25 with parameters ['Predictor 0: Instruction 15'].
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43, 67.35, 71.41, 77.18]
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/13 00:11:56 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 44 / 50 ==
+Average Metric: 17.92 / 25 (71.7%): 100%|████████████████████████████████████████████████████| 25/25 [04:06<00:00,  9.86s/it]
+2025/01/13 00:16:03 INFO dspy.evaluate.evaluate: Average Metric: 17.91785714285714 / 25 (71.7%)
+2025/01/13 00:16:03 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 71.67 on minibatch of size 25 with parameters ['Predictor 0: Instruction 19'].
+2025/01/13 00:16:03 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43, 67.35, 71.41, 77.18, 71.67]
+2025/01/13 00:16:03 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:16:03 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:16:03 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/13 00:16:03 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 45 / 50 ==
+Average Metric: 19.32 / 25 (77.3%): 100%|████████████████████████████████████████████████████| 25/25 [02:03<00:00,  4.95s/it]
+2025/01/13 00:18:06 INFO dspy.evaluate.evaluate: Average Metric: 19.322619047619046 / 25 (77.3%)
+2025/01/13 00:18:06 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 77.29 on minibatch of size 25 with parameters ['Predictor 0: Instruction 18'].
+2025/01/13 00:18:06 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43, 67.35, 71.41, 77.18, 71.67, 77.29]
+2025/01/13 00:18:06 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:18:06 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:18:06 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/13 00:18:06 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 46 / 50 ==
+Average Metric: 10.04 / 15 (66.9%):  56%|█████████████████████████████                       | 14/25 [02:04<01:41,  9.20s/it]2025/01/13 00:21:07 ERROR dspy.utils.parallelizer: Error processing item Example({'question': "I'm a 39 year old nurse.\nI'm concerned about healthcare industry fluctuations. Pharmaceutical companies announce breakthroughs in new drug therapies. \nWhat's your take on investing in pharmaceutical companies?", 'answer': "\nInvesting in pharmaceutical companies can be a great way to capitalize on the potential of new drug therapies. Pharmaceutical companies often experience a surge in stock prices when they announce breakthroughs in new drug therapies, so it can be a great way to make a profit. However, it is important to do your research and understand the risks associated with investing in pharmaceutical companies. Make sure to look at the company's financials, management team, and competitive landscape before investing."}) (input_keys={'question'}): litellm.RateLimitError: AzureException RateLimitError - Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-08-01-preview have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 2 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}. Set `provide_traceback=True` to see the stack trace.
+Average Metric: 13.58 / 20 (67.9%):  84%|███████████████████████████████████████████▋        | 21/25 [03:14<00:31,  7.94s/it]2025/01/13 00:22:10 ERROR dspy.utils.parallelizer: Error processing item Example({'question': "I'm a college student majoring in finance.\nI'm interested in learning about different investment opportunities. Cryptocurrencies gaining mainstream attention.\nStock market experiences a sudden drop.\nNew startups receiving significant venture capital funding. \nWhat are the risks of investing in cryptocurrencies?", 'answer': "\nInvesting in cryptocurrencies can be highly rewarding, but it also comes with significant risks. The volatile nature of crypto markets can lead to substantial price fluctuations, and regulatory uncertainties can impact their legality and value. Moreover, security concerns, such as hacking and fraud, are prevalent in the crypto space. It's crucial to conduct thorough research and understand the risks before investing."}) (input_keys={'question'}): litellm.RateLimitError: AzureException RateLimitError - Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-08-01-preview have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 8 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}. Set `provide_traceback=True` to see the stack trace.
+Average Metric: 15.42 / 23 (67.1%): 100%|████████████████████████████████████████████████████| 25/25 [04:14<00:00, 10.18s/it]
+2025/01/13 00:22:21 INFO dspy.evaluate.evaluate: Average Metric: 15.423412698412697 / 25 (61.7%)
+2025/01/13 00:22:21 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 61.69 on minibatch of size 25 with parameters ['Predictor 0: Instruction 17'].
+2025/01/13 00:22:21 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43, 67.35, 71.41, 77.18, 71.67, 77.29, 61.69]
+2025/01/13 00:22:21 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:22:21 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:22:21 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/13 00:22:21 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 47 / 50 ==
+Average Metric: 17.24 / 25 (69.0%): 100%|████████████████████████████████████████████████████| 25/25 [04:06<00:00,  9.88s/it]
+2025/01/13 00:26:28 INFO dspy.evaluate.evaluate: Average Metric: 17.240079365079364 / 25 (69.0%)
+2025/01/13 00:26:28 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 68.96 on minibatch of size 25 with parameters ['Predictor 0: Instruction 36'].
+2025/01/13 00:26:28 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43, 67.35, 71.41, 77.18, 71.67, 77.29, 61.69, 68.96]
+2025/01/13 00:26:28 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:26:28 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:26:28 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/13 00:26:28 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 48 / 50 ==
+Average Metric: 17.83 / 25 (71.3%): 100%|████████████████████████████████████████████████████| 25/25 [01:03<00:00,  2.54s/it]
+2025/01/13 00:27:31 INFO dspy.evaluate.evaluate: Average Metric: 17.83095238095238 / 25 (71.3%)
+2025/01/13 00:27:31 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 71.32 on minibatch of size 25 with parameters ['Predictor 0: Instruction 22'].
+2025/01/13 00:27:31 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43, 67.35, 71.41, 77.18, 71.67, 77.29, 61.69, 68.96, 71.32]
+2025/01/13 00:27:31 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:27:31 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:27:31 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/13 00:27:31 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 49 / 50 ==
+Average Metric: 20.16 / 25 (80.6%): 100%|██████████████████████████████████████████████████| 25/25 [00:00<00:00, 1322.67it/s]
+2025/01/13 00:27:32 INFO dspy.evaluate.evaluate: Average Metric: 20.157142857142855 / 25 (80.6%)
+2025/01/13 00:27:32 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 80.63 on minibatch of size 25 with parameters ['Predictor 0: Instruction 23'].
+2025/01/13 00:27:32 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43, 67.35, 71.41, 77.18, 71.67, 77.29, 61.69, 68.96, 71.32, 80.63]
+2025/01/13 00:27:32 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:27:32 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:27:32 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/13 00:27:32 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 50 / 50 ==
+Average Metric: 18.70 / 25 (74.8%): 100%|████████████████████████████████████████████████████| 25/25 [02:06<00:00,  5.07s/it]
+2025/01/13 00:29:38 INFO dspy.evaluate.evaluate: Average Metric: 18.70357142857143 / 25 (74.8%)
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 74.81 on minibatch of size 25 with parameters ['Predictor 0: Instruction 10'].
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [76.72, 75.63, 74.51, 77.9, 80.97, 67.37, 72.79, 71.12, 66.8, 65.07, 78.02, 73.24, 74.4, 78.9, 74.82, 83.13, 77.5, 76.47, 74.51, 77.78, 77.09, 73.63, 73.27, 73.03, 66.05, 71.9, 69.62, 72.66, 72.89, 72.04, 71.81, 67.42, 71.6, 71.57, 74.45, 74.73, 70.9, 62.74, 75.62, 68.43, 67.35, 71.41, 77.18, 71.67, 77.29, 61.69, 68.96, 71.32, 80.63, 74.81]
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38]
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: =============================
+
+
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: ===== Full Eval 5 =====
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: Doing full eval on next top averaging program (Avg Score: 80.63) from minibatch trials...
+Average Metric: 120.30 / 160 (75.2%): 100%|██████████████████████████████████████████████| 160/160 [00:00<00:00, 1116.39it/s]
+2025/01/13 00:29:38 INFO dspy.evaluate.evaluate: Average Metric: 120.2952380952381 / 160 (75.2%)
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.38, 74.43, 75.18, 75.18, 72.38, 75.18]
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 75.18
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: =======================
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: 
+
+2025/01/13 00:29:38 INFO dspy.teleprompt.mipro_optimizer_v2: Returning best identified program with score 75.18!
+Optimized program saved to: dspy_prompt_optimization/optimizer/mipro_optimizer_v2.json
+
+=== Evaluate optimized program on test set ===
+Average Metric: 152.16 / 200 (76.1%): 100%|████████████████████████████████████████████████| 200/200 [08:09<00:00,  2.45s/it]
+2025/01/13 00:37:48 INFO dspy.evaluate.evaluate: Average Metric: 152.1619047619047 / 200 (76.1%)
+Optimized program evaluation score: 76.0800
+
+=== Done! ===
