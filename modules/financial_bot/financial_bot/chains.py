@@ -170,11 +170,11 @@ class DSPYOptimizationChain(Chain):
 
         return ["about_me", "context", "question"]
 
-    @property
-    def output_keys(self) -> List[str]:
-        """Returns a list of output keys for the chain"""
+    # @property
+    # def output_keys(self) -> List[str]:
+    #     """Returns a list of output keys for the chain"""
 
-        return ["about_me", "context", "question"]
+    #     return ["about_me", "context", "question"]
     
     def _call(
         self,
@@ -210,7 +210,7 @@ class FinancialBotQAChain(Chain):
     def input_keys(self) -> List[str]:
         """Returns a list of input keys for the chain"""
         # Was changed to avoid confusion with what the chain actually uses. May need to change back to just "context".
-        return ["context"]
+        return ["about_me", "context", "chat_history", "question"]
 
     @property
     def output_keys(self) -> List[str]:
