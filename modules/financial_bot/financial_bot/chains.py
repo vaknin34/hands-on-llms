@@ -198,6 +198,9 @@ class DSPYOptimizationChain(Chain):
             env=copy_current_env,
         )
         #TODO: Maybe add some error handling based on subprocess error code.
+        print("STDOUT:\n", result.stdout)
+        print("STDERR:\n", result.stderr)
+        print("Return code:", result.returncode)
         return json.loads(result.stdout)
 
 
