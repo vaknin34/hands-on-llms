@@ -61,7 +61,7 @@ def run_local(
         #context_utilization,
         context_relevancy,
         context_recall,
-        answer_similarity,
+        #answer_similarity,
         #context_entity_recall,
         #answer_correctness,
         faithfulness
@@ -70,7 +70,6 @@ def run_local(
     metric_sums = {
         "context_relevancy": 0.0,
         "context_recall": 0.0,
-        "answer_similarity": 0.0,
         "faithfulness": 0.0
     }
     num_iterations = 0
