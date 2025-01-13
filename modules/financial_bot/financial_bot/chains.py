@@ -239,6 +239,7 @@ class FinancialBotQAChain(Chain):
             }
         )
 
+        print("Prompt:")
         print(prompt)
 
         start_time = time.time()
@@ -263,6 +264,8 @@ class FinancialBotQAChain(Chain):
                 },
             )
 
+        print("Response:")
+        print(response)
         return {"answer": response}
 
     def clean(self, inputs: Dict[str, str]) -> Dict[str, str]:
