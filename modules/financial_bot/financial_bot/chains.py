@@ -185,14 +185,14 @@ class DSPYOptimizationChain(Chain):
         """Calls the chain with the given inputs and returns the output"""
 
         prompt = json.dumps({k: inputs[k] for k in self.input_keys})
-        command = DSPYOptimizationChain.command_base + [prompt]
+        command = self.command_base + [prompt]
 
         copy_current_env = os.environ.copy()
         if "VIRTUAL_ENV" in copy_current_env:
             del copy_current_env["VIRTUAL_ENV"]
         result = subprocess.run(
             command,
-            cwd=DSPYOptimizationChain.target_directory,
+            cwd=self.target_directory,
             capture_output=True,
             text=True,
             env=copy_current_env,
