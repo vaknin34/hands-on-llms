@@ -13,4 +13,4 @@ generate-data:
 # build the miprov2 optimizer program.
 build-optimizer:
 	@echo "Building DSPY prompt optimizer..."
-	poetry run build_optimizer --data_path dspy_prompt_optimization/dataset/data_for_dspy.json --output_path optimizer/mipro_optimizer_v2.json
+	poetry run build_optimizer --data_path dspy_prompt_optimization/dataset/data_for_dspy.json --output_path dspy_prompt_optimization/optimizer/mipro_optimizer_v2.json
