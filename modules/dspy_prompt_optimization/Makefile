@@ -14,3 +14,8 @@ generate-data:
 build-optimizer:
 	@echo "Building DSPY prompt optimizer..."
 	poetry run build_optimizer --data_path dspy_prompt_optimization/dataset/data_for_dspy.json --output_path dspy_prompt_optimization/optimizer/mipro_optimizer_v2.json
+
+# prompt_optimizer does not supposed to be run manually
+# its is called in the inference pipeline by ../financial_bot/financial_bot/chains.py
+# prompt_optimizer:
+#	 poetry run prompt_optimizer --prompt <prompt_to_optimize>
