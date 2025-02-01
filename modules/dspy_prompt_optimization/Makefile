@@ -1,9 +1,8 @@
 .PHONY: Deals with dspy prompt optimization related tasks.
 
 # install Poetry and Python dependencies
-init:
+install:
 	@echo "Installing python environment..."
-	curl -sSL https://install.python-poetry.org | python3 -
 	poetry install
 
 # generate data for dspy optimation based on the training pipeline dataset and more syntethic data.
