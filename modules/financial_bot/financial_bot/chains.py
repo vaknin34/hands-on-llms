@@ -1,5 +1,8 @@
 import time
 from typing import Any, Dict, List, Optional
+import os
+import subprocess
+import json
 
 import qdrant_client
 from langchain import chains
@@ -155,6 +158,52 @@ class ContextExtractorChain(Chain):
         return question
 
 
+class DSPYOptimizationChain(Chain):
+    """This custom chain uses dspy to optimize the prompt."""
+
+    target_directory = "../dspy_prompt_optimization"
+    command_base = ["poetry", "run", "prompt_optimizer", "--prompt"]
+
+    @property
+    def input_keys(self) -> List[str]:
+        """Returns a list of input keys for the chain"""
+
+        return ["about_me", "context", "question"]
+
+    @property
+    def output_keys(self) -> List[str]:
+        """Returns a list of output keys for the chain"""
+
+        #return ["about_me", "context", "question"]
+        return []
+    
+    def _call(
+        self,
+        inputs: Dict[str, Any],
+        run_manager: Optional[CallbackManagerForChainRun] = None,
+    ) -> Dict[str, Any]:
+        """Calls the chain with the given inputs and returns the output"""
+
+        prompt = json.dumps({k: inputs[k] for k in self.input_keys})
+        command = self.command_base + [prompt]
+
+        copy_current_env = os.environ.copy()
+        if "VIRTUAL_ENV" in copy_current_env:
+            del copy_current_env["VIRTUAL_ENV"]
+        result = subprocess.run(
+            command,
+            cwd=self.target_directory,
+            capture_output=True,
+            text=True,
+            env=copy_current_env,
+        )
+        #TODO: Maybe add some error handling based on subprocess error code.
+        print("STDOUT:\n", result.stdout)
+        print("STDERR:\n", result.stderr)
+        print("Return code:", result.returncode)
+        return json.loads(result.stdout)
+
+
 class FinancialBotQAChain(Chain):
     """This custom chain handles LLM generation upon given prompt"""
 
@@ -164,8 +213,8 @@ class FinancialBotQAChain(Chain):
     @property
     def input_keys(self) -> List[str]:
         """Returns a list of input keys for the chain"""
-
-        return ["context"]
+        # Was changed to avoid confusion with what the chain actually uses. May need to change back to just "context".
+        return ["about_me", "context", "chat_history", "question"]
 
     @property
     def output_keys(self) -> List[str]:
@@ -190,6 +239,9 @@ class FinancialBotQAChain(Chain):
             }
         )
 
+        print("Prompt:")
+        print(prompt)
+
         start_time = time.time()
         response = self.hf_pipeline(prompt["prompt"])
         end_time = time.time()
@@ -212,6 +264,8 @@ class FinancialBotQAChain(Chain):
                 },
             )
 
+        print("Response:")
+        print(response)
         return {"answer": response}
 
     def clean(self, inputs: Dict[str, str]) -> Dict[str, str]:

@@ -1,0 +1,161 @@
+poetry run build_optimizer --data_path dspy_prompt_optimization/dataset/data_for_dspy.json --output_path dspy_prompt_optimization/optimizer/mipro_optimizer_v2_light.json
+
+=== Baseline evaluation of original ChainOfThought ===
+Average Metric: 137.59 / 200 (68.8%): 100%|███████████████████████████████████████████████| 200/200 [00:00<00:00, 459.52it/s]
+2025/01/13 18:52:55 INFO dspy.evaluate.evaluate: Average Metric: 137.58730158730154 / 200 (68.8%)
+Baseline evaluation score: 68.7900
+
+=== Optimizing program with MIPROv2... ===
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: 
+RUNNING WITH THE FOLLOWING LIGHT AUTO RUN SETTINGS:
+num_trials: 7
+minibatch: True
+num_candidates: 5
+valset size: 100
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: 
+==> STEP 1: BOOTSTRAP FEWSHOT EXAMPLES <==
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: These will be used as few-shot example candidates for our program and for creating instructions.
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: Bootstrapping N=5 sets of demonstrations...
+Bootstrapping set 1/5
+Bootstrapping set 2/5
+Bootstrapping set 3/5
+  0%|                                                                                                 | 0/40 [00:00<?, ?it/s]2025/01/13 18:52:55 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a 26 year old investor.\nI want to explore opportunities in emerging markets. Eastern European economies attract investments with improving infrastructure and skilled workforce. \nHow do you view the growth potential of Eastern European markets?", 'answer': '\nEastern European markets have great potential for growth. The improving infrastructure and skilled workforce make them attractive to investors. The region is also home to some of the fastest-growing economies in the world, such as Poland and Romania. Investing in stocks and cryptocurrencies in these markets can be a great way to diversify your portfolio and benefit from the potential for high returns. Additionally, investing in emerging markets can help to reduce risk and provide a hedge against global economic downturns.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x1029d3d80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+2025/01/13 18:52:55 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a 34 year old entrepreneur.\nI'm interested in growth investments with a long-term horizon. Middle Eastern tech startups receive significant venture capital investments. \nDo you think investing in Middle Eastern tech startups is a good idea?", 'answer': '\nYes, investing in Middle Eastern tech startups can be a good idea. The region has seen a surge in venture capital investments, which indicates that there is a lot of potential for growth. Additionally, the region is home to a number of innovative startups that are well-positioned to capitalize on the growing demand for technology in the region. Investing in these startups can be a great way to capitalize on the growth potential of the region.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x1029d3d80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+2025/01/13 18:52:55 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a 30 year old investor.\nI'm intrigued by the growth of renewable energy in emerging markets. African countries invest in solar energy projects to address energy demand and sustainability. \nWhat's your take on investing in solar energy projects in Africa?", 'answer': '\nMy advice is to invest in solar energy projects in Africa. The renewable energy sector is growing rapidly in the region, and the potential for returns is high. Additionally, the projects are likely to have a positive impact on the environment and the local economy. Investing in solar energy projects in Africa is a great way to diversify your portfolio and benefit from the growth of the sector.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x1029d3d80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+2025/01/13 18:52:55 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a 35-year-old software engineer with a passion for technology.\nI've been following the stock market for years and want to explore trading strategies. Tech companies announce strong earnings.\nGlobal economic uncertainty due to trade tensions.\nInterest rates remain stable. \nShould I invest in tech stocks?", 'answer': '\nConsidering your background in technology and interest in trading strategies, investing in tech stocks could align well with your goals. Positive earnings reports from tech companies and stable interest rates suggest that tech stocks could be a promising investment opportunity. However, be cautious of potential market volatility caused by global economic uncertainties and trade tensions.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x1029d3d80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+2025/01/13 18:52:55 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a retired financial analyst, and I have a diverse investment portfolio.\nI'm looking for ways to preserve and grow my wealth. Inflation rates are rising.\nPrecious metals, like gold and silver, gaining popularity.\nGovernment announces new economic stimulus package. \nHow can I protect my wealth against inflation?", 'answer': "\nProtecting your wealth against inflation requires a well-diversified approach. While precious metals like gold and silver can act as a hedge against inflation, it's also important to consider other assets like real estate and diversified investment funds. Additionally, staying informed about government policies and economic indicators can help you make strategic decisions to safeguard your wealth."}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x1029d3d80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+2025/01/13 18:52:55 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a college student majoring in finance.\nI'm interested in learning about different investment opportunities. Cryptocurrencies gaining mainstream attention.\nStock market experiences a sudden drop.\nNew startups receiving significant venture capital funding. \nWhat are the risks of investing in cryptocurrencies?", 'answer': "\nInvesting in cryptocurrencies can be highly rewarding, but it also comes with significant risks. The volatile nature of crypto markets can lead to substantial price fluctuations, and regulatory uncertainties can impact their legality and value. Moreover, security concerns, such as hacking and fraud, are prevalent in the crypto space. It's crucial to conduct thorough research and understand the risks before investing."}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x1029d3d80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+2025/01/13 18:52:55 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I am a 28 year old marketing professional.\nI have some savings and I'm interested in crypto investments. El Salvador adopts Bitcoin as legal tender.\nRecent fluctuations in Bitcoin's price.\nRenewed interest from institutional investors. \nIs Bitcoin a good investment option?", 'answer': '\nYes, Bitcoin is a good investment option. The recent news of El Salvador adopting Bitcoin as legal tender has increased its demand and price, and institutional investors are showing renewed interest in the cryptocurrency. This makes it a good option for long-term investments, as it is likely to continue to increase in value over time.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x1029d3d80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+2025/01/13 18:52:55 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm an entrepreneur with a background in the tech industry.\nI'm interested in diversifying my income streams. Gig economy continues to grow.\nReal estate crowdfunding gains popularity.\nStartups with innovative solutions attract venture capital funding. \nHow can I invest in startups?", 'answer': '\nInvesting in startups can be done through angel investing, venture capital funds, or crowdfunding platforms. Angel investing involves providing funding to early-stage startups in exchange for equity. Venture capital funds pool resources from multiple investors to invest in a diversified portfolio of startups. Crowdfunding platforms allow you to invest smaller amounts alongside other investors.'}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x1029d3d80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+2025/01/13 18:52:55 ERROR dspy.teleprompt.bootstrap: Failed to run or to evaluate example Example({'question': "I'm a retiree looking for stable sources of income.\nI want to make the most of my retirement savings. Dividend-paying stocks gain attention for income investors.\nBonds offer fixed interest payments and lower risk.\nAnnuities provide guaranteed income for life. \nWhat are the best income-generating options for retirees?", 'answer': "\nFor retirees seeking income, dividend-paying stocks, bonds, and annuities are popular options. Dividend stocks provide regular dividend payments, while bonds offer fixed interest income. Annuities offer guaranteed income for life, providing financial security during retirement. It's essential to balance your portfolio to meet your income needs and risk tolerance."}) (input_keys={'question'}) with <function evaluate_faithfulness at 0x1029d3d80> due to evaluate_faithfulness() takes 2 positional arguments but 3 were given.
+ 22%|███████████████████▊                                                                    | 9/40 [00:00<00:00, 603.83it/s]
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: Error generating few-shot examples: evaluate_faithfulness() takes 2 positional arguments but 3 were given
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: Running without few-shot examples.
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: 
+==> STEP 2: PROPOSE INSTRUCTION CANDIDATES <==
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: We will use the few-shot examples from the previous step, a generated dataset summary, a summary of the program code, and a randomly selected prompting tip to propose instructions.
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: 
+Proposing instructions...
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: Proposed Instructions for Predictor 0:
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: 0: Given the fields `question`, produce the fields `answer`.
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: 1: You are tasked with providing actionable and accurate financial advice in a high-stakes scenario. Given the input field `question`, which contains a financial query or problem, first generate a detailed and logical step-by-step explanation in the field `reasoning` to justify your approach. This reasoning should demonstrate a clear understanding of financial principles and practical application to the situation. Then, produce the final solution or recommendation in the field `answer`, ensuring it is concise, relevant, and actionable. Your response must be technically accurate and considerate of the potential impact on the user's financial decisions.
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: 2: You are tasked with providing actionable and accurate financial advice in a high-stakes scenario. Given the input field `question`, which contains a financial query or problem, first generate a detailed and logical step-by-step explanation in the field `reasoning` to justify your approach. This reasoning should demonstrate a clear understanding of financial principles and practical application to the situation. Then, produce the final solution or recommendation in the field `answer`, ensuring it is concise, relevant, and actionable. Your response must be technically accurate and considerate of the potential impact on the user's financial decisions.
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: 3: You are tasked with providing actionable and accurate financial advice in a high-stakes scenario. Given the input field `question`, which contains a financial query or problem, first generate a detailed and logical step-by-step explanation in the field `reasoning` to justify your approach. This reasoning should demonstrate a clear understanding of financial principles and practical application to the situation. Then, produce the final solution or recommendation in the field `answer`, ensuring it is concise, relevant, and actionable. Your response must be technically accurate and considerate of the potential impact on the user's financial decisions.
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: 4: You are a financial advisor specializing in delivering personalized and actionable financial advice. Given the field `question`, which represents a financial query or scenario, provide two outputs: 
+
+1. `reasoning`: A step-by-step explanation or logical reasoning process that leads to the solution of the question. Begin with "Reasoning: Let's think step by step in order to" and ensure the explanation is clear, structured, and incorporates relevant financial principles or trends when applicable.
+
+2. `answer`: The final response or solution to the question. Start with "Answer:" and ensure it is concise, accurate, and practical.
+
+Make sure your outputs are technically sound, easy to understand, and tailored to the context of the question.
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: 
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: Evaluating the default program...
+
+Average Metric: 68.04 / 100 (68.0%): 100%|███████████████████████████████████████████████| 100/100 [00:00<00:00, 1216.40it/s]
+2025/01/13 18:52:55 INFO dspy.evaluate.evaluate: Average Metric: 68.0440476190476 / 100 (68.0%)
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: Default program score: 68.04
+
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: ==> STEP 3: FINDING OPTIMAL PROMPT PARAMETERS <==
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: We will evaluate the program over a series of trials with different combinations of instructions and few-shot examples to find the optimal combination using Bayesian Optimization.
+
+/Users/nivvaknin/Library/Caches/pypoetry/virtualenvs/dspy-prompt-optimization-ttF9o-b8-py3.11/lib/python3.11/site-packages/optuna/_experimental.py:31: ExperimentalWarning: Argument ``multivariate`` is an experimental feature. The interface can change in the future.
+  warnings.warn(
+2025/01/13 18:52:55 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 1 / 7 ==
+Average Metric: 16.37 / 25 (65.5%): 100%|████████████████████████████████████████████████████| 25/25 [02:21<00:00,  5.66s/it]
+2025/01/13 18:55:17 INFO dspy.evaluate.evaluate: Average Metric: 16.374603174603173 / 25 (65.5%)
+2025/01/13 18:55:17 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 65.5 on minibatch of size 25 with parameters ['Predictor 0: Instruction 1'].
+2025/01/13 18:55:17 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [65.5]
+2025/01/13 18:55:17 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.04]
+2025/01/13 18:55:17 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.04
+2025/01/13 18:55:17 INFO dspy.teleprompt.mipro_optimizer_v2: ===========================
+
+
+2025/01/13 18:55:17 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 2 / 7 ==
+Average Metric: 16.18 / 25 (64.7%): 100%|████████████████████████████████████████████████████| 25/25 [01:47<00:00,  4.31s/it]
+2025/01/13 18:57:05 INFO dspy.evaluate.evaluate: Average Metric: 16.183333333333334 / 25 (64.7%)
+2025/01/13 18:57:05 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 64.73 on minibatch of size 25 with parameters ['Predictor 0: Instruction 1'].
+2025/01/13 18:57:05 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [65.5, 64.73]
+2025/01/13 18:57:05 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.04]
+2025/01/13 18:57:05 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.04
+2025/01/13 18:57:05 INFO dspy.teleprompt.mipro_optimizer_v2: ===========================
+
+
+2025/01/13 18:57:05 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 3 / 7 ==
+Average Metric: 15.19 / 25 (60.8%): 100%|████████████████████████████████████████████████████| 25/25 [02:00<00:00,  4.84s/it]
+2025/01/13 18:59:06 INFO dspy.evaluate.evaluate: Average Metric: 15.194444444444443 / 25 (60.8%)
+2025/01/13 18:59:06 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 60.78 on minibatch of size 25 with parameters ['Predictor 0: Instruction 2'].
+2025/01/13 18:59:06 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [65.5, 64.73, 60.78]
+2025/01/13 18:59:06 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.04]
+2025/01/13 18:59:06 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.04
+2025/01/13 18:59:06 INFO dspy.teleprompt.mipro_optimizer_v2: ===========================
+
+
+2025/01/13 18:59:06 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 4 / 7 ==
+Average Metric: 16.23 / 25 (64.9%): 100%|████████████████████████████████████████████████████| 25/25 [00:14<00:00,  1.71it/s]
+2025/01/13 18:59:20 INFO dspy.evaluate.evaluate: Average Metric: 16.23253968253968 / 25 (64.9%)
+2025/01/13 18:59:20 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 64.93 on minibatch of size 25 with parameters ['Predictor 0: Instruction 1'].
+2025/01/13 18:59:20 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [65.5, 64.73, 60.78, 64.93]
+2025/01/13 18:59:20 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.04]
+2025/01/13 18:59:20 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.04
+2025/01/13 18:59:20 INFO dspy.teleprompt.mipro_optimizer_v2: ===========================
+
+
+2025/01/13 18:59:20 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 5 / 7 ==
+Average Metric: 17.89 / 25 (71.6%): 100%|████████████████████████████████████████████████████| 25/25 [00:45<00:00,  1.83s/it]
+2025/01/13 19:00:06 INFO dspy.evaluate.evaluate: Average Metric: 17.891666666666666 / 25 (71.6%)
+2025/01/13 19:00:06 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 71.57 on minibatch of size 25 with parameters ['Predictor 0: Instruction 4'].
+2025/01/13 19:00:06 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [65.5, 64.73, 60.78, 64.93, 71.57]
+2025/01/13 19:00:06 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.04]
+2025/01/13 19:00:06 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.04
+2025/01/13 19:00:06 INFO dspy.teleprompt.mipro_optimizer_v2: ===========================
+
+
+2025/01/13 19:00:06 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 6 / 7 ==
+Average Metric: 16.67 / 25 (66.7%): 100%|████████████████████████████████████████████████████| 25/25 [00:19<00:00,  1.25it/s]
+2025/01/13 19:00:26 INFO dspy.evaluate.evaluate: Average Metric: 16.665476190476188 / 25 (66.7%)
+2025/01/13 19:00:26 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 66.66 on minibatch of size 25 with parameters ['Predictor 0: Instruction 1'].
+2025/01/13 19:00:26 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [65.5, 64.73, 60.78, 64.93, 71.57, 66.66]
+2025/01/13 19:00:26 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.04]
+2025/01/13 19:00:26 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.04
+2025/01/13 19:00:26 INFO dspy.teleprompt.mipro_optimizer_v2: ===========================
+
+
+2025/01/13 19:00:26 INFO dspy.teleprompt.mipro_optimizer_v2: == Minibatch Trial 7 / 7 ==
+Average Metric: 16.80 / 25 (67.2%): 100%|████████████████████████████████████████████████████| 25/25 [00:56<00:00,  2.25s/it]
+2025/01/13 19:01:22 INFO dspy.evaluate.evaluate: Average Metric: 16.801190476190477 / 25 (67.2%)
+2025/01/13 19:01:22 INFO dspy.teleprompt.mipro_optimizer_v2: Score: 67.2 on minibatch of size 25 with parameters ['Predictor 0: Instruction 2'].
+2025/01/13 19:01:22 INFO dspy.teleprompt.mipro_optimizer_v2: Minibatch scores so far: [65.5, 64.73, 60.78, 64.93, 71.57, 66.66, 67.2]
+2025/01/13 19:01:22 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.04]
+2025/01/13 19:01:22 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 68.04
+2025/01/13 19:01:22 INFO dspy.teleprompt.mipro_optimizer_v2: ===========================
+
+
+2025/01/13 19:01:22 INFO dspy.teleprompt.mipro_optimizer_v2: ===== Full Eval 1 =====
+2025/01/13 19:01:22 INFO dspy.teleprompt.mipro_optimizer_v2: Doing full eval on next top averaging program (Avg Score: 71.57) from minibatch trials...
+Average Metric: 72.82 / 100 (72.8%): 100%|█████████████████████████████████████████████████| 100/100 [00:57<00:00,  1.75it/s]
+2025/01/13 19:02:19 INFO dspy.evaluate.evaluate: Average Metric: 72.82380952380953 / 100 (72.8%)
+2025/01/13 19:02:19 INFO dspy.teleprompt.mipro_optimizer_v2: New best full eval score! Score: 72.82
+2025/01/13 19:02:19 INFO dspy.teleprompt.mipro_optimizer_v2: Full eval scores so far: [68.04, 72.82]
+2025/01/13 19:02:19 INFO dspy.teleprompt.mipro_optimizer_v2: Best full score so far: 72.82
+2025/01/13 19:02:19 INFO dspy.teleprompt.mipro_optimizer_v2: =======================
+2025/01/13 19:02:19 INFO dspy.teleprompt.mipro_optimizer_v2: 
+
+2025/01/13 19:02:19 INFO dspy.teleprompt.mipro_optimizer_v2: Returning best identified program with score 72.82!
+Optimized program saved to: dspy_prompt_optimization/optimizer/mipro_optimizer_v2_light.json
+
+=== Evaluate optimized program on test set ===
+Average Metric: 146.95 / 200 (73.5%): 100%|████████████████████████████████████████████████| 200/200 [09:16<00:00,  2.78s/it]
+2025/01/13 19:11:35 INFO dspy.evaluate.evaluate: Average Metric: 146.95079365079357 / 200 (73.5%)
+Optimized program evaluation score: 73.4800
+
+=== Done! ===
